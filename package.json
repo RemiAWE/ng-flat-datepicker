@@ -1,0 +1,39 @@
+{
+  "name": "ng-datepicker",
+  "version": "0.0.1",
+  "description": "Angular.js Datepicker built with Moment.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RemiAWE/ng-datepicker.git"
+  },
+  "keywords": [
+    "angular.js",
+    "angular",
+    "datepicker",
+    "moment.js",
+    "moment"
+  ],
+  "author": "Rémi Chanaud",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RemiAWE/ng-datepicker/issues"
+  },
+  "homepage": "https://github.com/RemiAWE/ng-datepicker#readme",
+  "dependencies": {
+    "angular": "^1.4.5",
+    "moment": "^2.10.6"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-batch": "^1.0.5",
+    "gulp-load-plugins": "^0.10.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.0.4",
+    "gulp-watch": "^4.3.5"
+  }
+}
