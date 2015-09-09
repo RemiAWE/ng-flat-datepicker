@@ -38,6 +38,7 @@ gulp.task('sass', function(){
         .pipe($.plumber(plumberErrorHandler))
         .pipe($.sass({ outputStyle: 'expanded' }))
         .pipe($.csso())
+        .pipe($.autoprefixer({ browsers: ['last 2 versions'] }))
         .pipe($.rename('ng-datepicker.css'))
         .pipe(gulp.dest(paths.dist));
 });

@@ -32,7 +32,7 @@ $default-color: #0093de;
                 height: $header-h;
                 line-height: $header-h;
                 color: white;
-                font-size: 1.2em;
+                font-size: 22px;
             }
         }
         tbody {
@@ -62,7 +62,8 @@ $default-color: #0093de;
                     font-size: 12px;
                     display: inline-block;
                     cursor: default;
-                    color: lighten($font-color, 50%);
+                    color: lighten($font-color, 70%);
+                    user-select: none;
                     &.day-item,
                     &.disabled {
                         padding: 0;
@@ -70,7 +71,7 @@ $default-color: #0093de;
                         line-height: ($width - (2 * $table-padding))/7;
                         cursor: pointer;
                         border-radius: ($width - (2 * $table-padding))/14;
-                        color: lighten($font-color, 20%);
+                        color: lighten($font-color, 40%);
                         &.day {
                             color: $font-color;
                         }
@@ -85,10 +86,10 @@ $default-color: #0093de;
                         &.isInMonth {
                             color: $font-color;
                         }
-                    }
-                    &.isFuture {
-                        cursor: default;
-                        color: lighten($font-color, 50%);
+                        &.isFuture {
+                            cursor: default;
+                            color: lighten($font-color, 40%);
+                        }
                     }
                 }
             }
@@ -120,7 +121,7 @@ caption {
   padding-top: 5px;
   padding-bottom: 5px;
   color: #626262;
-  font-size: 1.2em;
+  font-size: 22px;
   background-color: #E8E8E8;
 }
 .other {
@@ -140,12 +141,34 @@ caption {
   border-bottom: 1px solid red;
 }
 
+.ng-datepicker-arrow {
+    user-select: none;
+    svg {
+        width: 15px;
+        height: 15px;
+        fill: white;
+        cursor: pointer;
+        &:hover {
+            fill: rgba(255,255,255,.8);
+        }
+    }
+    &.ng-datepicker-arrow-right {
+        margin-right: 5px;
+        float: right;
+    }
+    &.ng-datepicker-arrow-left {
+        margin-left: 5px;
+        float: left;
+        transform: rotate(180deg);
+    }
+}
+
 .ng-custom-select-title {
     padding: 3px 9px 4px 9px;
     border: 1px solid $default-color;
     border-radius: 3px;
-    line-height: 1.2em;
-    font-size: 1.2em;
+    line-height: 22px;
+    font-size: 22px;
     display: inline-block;
     cursor: pointer;
     transition: border-color .10s ease-in;

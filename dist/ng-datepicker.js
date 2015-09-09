@@ -16,38 +16,39 @@
             restrict: 'A',
             require: 'ngModel',
             scope: {
-                allowFuture: '&',
-                maxDate: '&',
-                minDate: '&'
+                dateFormat: '=?',
+                allowFuture: '=?',
+                minDate: '=?',
+                maxDate: '=?'
             },
             link: function(scope, element, attrs, ngModel) {
 
+                var template = angular.element($templateCache.get('datepicker.html'));
                 var today = moment.utc();
                 var dateSelected = '';
+
+                // Default options
+                scope.allowFuture = angular.isDefined(scope.allowFuture) ? scope.allowFuture : true;
+                scope.dateFormat = angular.isDefined(scope.dateFormat) ? scope.dateFormat : false;
 
                 // Data
                 scope.calendarCursor  = today;
                 scope.currentWeeks    = [];
-                scope.daysNameList    = [];
+                scope.daysNameList    = datesCalculator.getDaysNames();
                 scope.monthsList      = moment.months();
-                scope.yearsList       = [];
+                scope.yearsList       = datesCalculator.getYearsList();
 
                 // Display
                 scope.pickerDisplayed = false;
 
-                // List all days name in the current locale
-                for (var i = 0; i < 7 ; i++) {
-                    scope.daysNameList  .push(moment().weekday(i).format('ddd'));
-                }
-
-                for (var i = 2005; i <= moment().year(); i++) {
-                    scope.yearsList.push(i);
-                }
-
                 scope.$watch(function(){ return ngModel.$modelValue; }, function(value){
-                    if(moment.isDate(value)){
-                        dateSelected = scope.calendarCursor = moment.utc(value);
+                    if(value){
+                        dateSelected = scope.calendarCursor = moment.utc(value, scope.dateFormat);
                     }
+                });
+
+                scope.$watch('calendarCursor', function(val){
+                    scope.currentWeeks = getWeeks(val);
                 });
 
                 // Ng change enabled ?
@@ -55,26 +56,21 @@
                 //     scope.$eval(attrs.ngChange);
                 // });
 
-                element.bind('click', function() {
+                // ClickOutside
+                element.bind('click', function(e) {
+                    e.stopPropagation();
                     scope.$apply(function(){
                         scope.pickerDisplayed = true;
-                        // $document.on('click', function (e) {
-                        //     if (element !== e.target && !element[0].contains(e.target)) {
-                        //         scope.$apply(function () {
-                        //             scope.pickerDisplayed = false;
-                        //         });
-                        //      }
-                        // });
-                    });
-                });
-
-                scope.$watch('pickerDisplayed', function(val){
-                    if(val){
-                        var isHover = false;
-                        element.bind('mouseenter mouseleave', function(){
-                            isHover = !isHover;
+                        $document.bind('click', function (e) {
+                            if (template !== e.target && !template[0].contains(e.target)) {
+                                $document.unbind('click');
+                                scope.$apply(function () {
+                                    scope.calendarCursor = dateSelected ? dateSelected : today;
+                                    scope.pickerDisplayed = scope.showMonthsList = scope.showYearsList = false;
+                                });
+                             }
                         });
-                    }
+                    });
                 });
 
                 init();
@@ -85,7 +81,6 @@
                  */
                 scope.prevMonth = function() {
                     scope.calendarCursor = moment(scope.calendarCursor).subtract(1, 'months');
-                    scope.currentWeeks = getWeeks(scope.calendarCursor);
                 };
 
                 /**
@@ -94,7 +89,6 @@
                  */
                 scope.nextMonth = function nextMonth() {
                     scope.calendarCursor = moment(scope.calendarCursor).add(1, 'months');
-                    scope.currentWeeks = getWeeks(scope.calendarCursor);
                 };
 
                 /**
@@ -103,8 +97,8 @@
                  * @return {}
                  */
                 scope.selectMonth = function selectMonth(month) {
+                    scope.showMonthsList = false;
                     scope.calendarCursor = moment(scope.calendarCursor).month(month);
-                    scope.currentWeeks = getWeeks(scope.calendarCursor);
                 };
 
                 /**
@@ -113,8 +107,8 @@
                  * @return {}
                  */
                 scope.selectYear = function selectYear(year) {
+                    scope.showYearsList = false;
                     scope.calendarCursor = moment(scope.calendarCursor).year(year);
-                    scope.currentWeeks = getWeeks(scope.calendarCursor);
                 };
 
                 /**
@@ -123,10 +117,13 @@
                  * @return {[type]}     [description]
                  */
                 scope.selectDay = function(day) {
-                    console.log('Hello', day);
-                    ngModel.$setViewValue(day.date);
-                    ngModel.$render();
-                    scope.pickerDisplayed = false;
+                    if (!day.isFuture || (scope.allowFuture && day.isFuture)) {
+                        resetSelectedDays();
+                        day.isSelected = true;
+                        ngModel.$setViewValue(moment.utc(day.date).format(scope.dateFormat));
+                        ngModel.$render();
+                        scope.pickerDisplayed = false;
+                    }
                 };
 
                 /**
@@ -134,15 +131,13 @@
                  * @return {}
                  */
                 function init() {
-                    var template = angular.element($templateCache.get('datepicker.html'));
+
                     $compile(template)(scope);
                     element.after(template);
 
                     if (angular.isDefined(ngModel.$modelValue) && moment.isDate(ngModel.$modelValue)) {
                         scope.calendarCursor = ngModel.$modelValue;
                     }
-
-                    scope.currentWeeks = getWeeks(scope.calendarCursor);
                 }
 
                 /**
@@ -184,6 +179,14 @@
 
                     return weeks;
                 }
+
+                function resetSelectedDays () {
+                    scope.currentWeeks.forEach(function(week, wIndex){
+                        week.forEach(function(day, dIndex){
+                            scope.currentWeeks[wIndex][dIndex].isSelected = false;
+                        });
+                    });
+                }
             }
         };
     }
@@ -205,12 +208,33 @@
 
     function datesCalculator () {
 
-        function getWeeks () {
+        /**
+         * List all years for the select
+         * @return {[type]} [description]
+         */
+        function getYearsList() {
+            var yearsList = [];
+            for (var i = 2005; i <= moment().year(); i++) {
+                yearsList.push(i);
+            }
+            return yearsList;
+        }
 
+        /**
+         * List all days name in the current locale
+         * @return {[type]} [description]
+         */
+        function getDaysNames () {
+            var daysNameList = [];
+            for (var i = 0; i < 7 ; i++) {
+                daysNameList.push(moment().weekday(i).format('ddd'));
+            }
+            return daysNameList;
         }
 
         return {
-            getWeeks: getWeeks
+            getYearsList: getYearsList,
+            getDaysNames: getDaysNames
         };
     }
 
@@ -251,4 +275,4 @@
 
 })();
 
-angular.module("ngDatepicker").run(["$templateCache", function($templateCache) {$templateCache.put("datepicker.html","<div class=\"ng-datepicker\" ng-show=\"pickerDisplayed\">\n    <div class=\"mb-table-header-bckgrnd\"></div>\n    <table>\n        <caption>\n            <div class=\"header-year-wrapper\">\n                <span style=\"display: inline-block; float: left; cursor: pointer\" class=\"noselect\" ng-click=\"prevMonth()\"><svg class=\"icon-select-arrow-right\"><symbol id=\"icon-select-arrow-right\" viewBox=\"0 0 1024 1024\">\n	<title>select-arrow-right</title>\n	<path class=\"path1\" d=\"M350.293 707.627l195.627-195.627-195.627-195.627 60.373-60.373 256 256-256 256z\"></path>\n</symbol></svg></span>\n                <div class=\"header-year noselect\" ng-class=\"noselect\">\n                    <div class=\"mb-custom-select-box\" outside-click=\"showMonthsList = false\">\n                        <span class=\"ng-custom-select-title mb-month-name\" ng-click=\"showMonthsList = !showMonthsList; showYearsList = false\" ng-class=\"{selected: showMonthsList }\">{{ calendarCursor.format(\'MMMM\') }}</span>\n                        <div class=\"mb-custom-select\" ng-show=\"showMonthsList\">\n                            <span ng-repeat=\"monthName in monthsList\" ng-click=\"selectMonth(monthName)\">{{ monthName }}</span>\n                        </div>\n                    </div>\n                    <div class=\"mb-custom-select-box\" outside-click=\"showYearsList = false\">\n                        <span class=\"ng-custom-select-title\" ng-click=\"showYearsList = !showYearsList; showMonthsList = false\" ng-class=\"{selected: showYearsList }\">{{ calendarCursor.format(\'YYYY\') }}</span>\n                        <div class=\"mb-custom-select\" ng-show=\"showYearsList\">\n                            <span ng-repeat=\"yearNumber in yearsList\" ng-click=\"selectYear(yearNumber)\">{{ yearNumber }}</span>\n                        </div>\n                    </div>\n                </div>\n                <span style=\"display: inline-block; float: right; cursor: pointer\" class=\"noselect\" ng-click=\"nextMonth()\">></span>\n            </div>\n        </caption>\n        <tbody>\n            <tr class=\"days-head\">\n                <td class=\"day-head\" ng-repeat=\"dayName in daysNameList\">{{ dayName }}</td>\n            </tr>\n            <tr class=\"days\" ng-repeat=\"week in currentWeeks\">\n                <td ng-repeat=\"day in week\" ng-click=\"selectDay(day)\" ng-class=\"[\'day-item\', { \'isToday\': day.isToday, \'isInMonth\': day.isInMonth, \'isFuture\': day.isFuture && !allowFuture, \'day-selected\': day.isSelected }]\">{{ day.date | date:\'dd\' }}</td>\n            </tr>\n        </tbody>\n    </table>\n</div>\n");}]);
+angular.module("ngDatepicker").run(["$templateCache", function($templateCache) {$templateCache.put("datepicker.html","<div class=\"ng-datepicker\" ng-show=\"pickerDisplayed\">\n    <div class=\"mb-table-header-bckgrnd\"></div>\n    <table>\n        <caption>\n            <div class=\"header-year-wrapper\">\n                <span class=\"ng-datepicker-arrow ng-datepicker-arrow-left\" ng-click=\"prevMonth()\">\n                    <svg version=\"1.0\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"50\" y=\"50\" viewBox=\"0 0 100 100\" xml:space=\"preserve\">\n                        <polygon points=\"64.8,36.2 35.2,6.5 22.3,19.4 51.9,49.1 22.3,78.8 35.2,91.7 77.7,49.1\" />\n                    </svg>\n                </span>\n                <div class=\"header-year noselect\" ng-class=\"noselect\">\n                    <div class=\"mb-custom-select-box\" outside-click=\"showMonthsList = false\">\n                        <span class=\"ng-custom-select-title mb-month-name\" ng-click=\"showMonthsList = !showMonthsList; showYearsList = false\" ng-class=\"{selected: showMonthsList }\">{{ calendarCursor.format(\'MMMM\') }}</span>\n                        <div class=\"mb-custom-select\" ng-show=\"showMonthsList\">\n                            <span ng-repeat=\"monthName in monthsList\" ng-click=\"selectMonth(monthName); showMonthsList = false\">{{ monthName }}</span>\n                        </div>\n                    </div>\n                    <div class=\"mb-custom-select-box\" outside-click=\"showYearsList = false\">\n                        <span class=\"ng-custom-select-title\" ng-click=\"showYearsList = !showYearsList; showMonthsList = false\" ng-class=\"{selected: showYearsList }\">{{ calendarCursor.format(\'YYYY\') }}</span>\n                        <div class=\"mb-custom-select\" ng-show=\"showYearsList\">\n                            <span ng-repeat=\"yearNumber in yearsList\" ng-click=\"selectYear(yearNumber)\">{{ yearNumber }}</span>\n                        </div>\n                    </div>\n                </div>\n                <span class=\"ng-datepicker-arrow ng-datepicker-arrow-right\" ng-click=\"nextMonth()\">\n                    <svg version=\"1.0\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 100 100\" xml:space=\"preserve\">\n                        <polygon points=\"64.8,36.2 35.2,6.5 22.3,19.4 51.9,49.1 22.3,78.8 35.2,91.7 77.7,49.1\" />\n                    </svg>\n                </span>\n            </div>\n        </caption>\n        <tbody>\n            <tr class=\"days-head\">\n                <td class=\"day-head\" ng-repeat=\"dayName in daysNameList\">{{ dayName }}</td>\n            </tr>\n            <tr class=\"days\" ng-repeat=\"week in currentWeeks\">\n                <td ng-repeat=\"day in week\" ng-click=\"selectDay(day)\" ng-class=\"[\'day-item\', { \'isToday\': day.isToday, \'isInMonth\': day.isInMonth, \'isFuture\': day.isFuture && !allowFuture, \'isSelected\': day.isSelected }]\">{{ day.date | date:\'dd\' }}</td>\n            </tr>\n        </tbody>\n    </table>\n</div>\n");}]);

@@ -23,15 +23,14 @@
     "url": "https://github.com/RemiAWE/ng-datepicker/issues"
   },
   "homepage": "https://github.com/RemiAWE/ng-datepicker#readme",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "angular": "^1.4.5",
-    "moment": "^2.10.6",
     "event-stream": "^3.3.1",
     "gulp": "^3.9.0",
     "gulp-angular-filesort": "^1.1.1",
     "gulp-angular-templatecache": "^1.7.0",
+    "gulp-autoprefixer": "^3.0.1",
     "gulp-batch": "^1.0.5",
     "gulp-concat": "^2.6.0",
     "gulp-csso": "^1.0.0",
@@ -41,6 +40,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.4",
     "gulp-uglify": "^1.4.0",
-    "gulp-watch": "^4.3.5"
+    "gulp-watch": "^4.3.5",
+    "moment": "^2.10.6"
   }
 }

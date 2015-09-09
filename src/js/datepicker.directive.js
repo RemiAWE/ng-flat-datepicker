@@ -16,38 +16,39 @@
             restrict: 'A',
             require: 'ngModel',
             scope: {
-                allowFuture: '&',
-                maxDate: '&',
-                minDate: '&'
+                dateFormat: '=?',
+                allowFuture: '=?',
+                minDate: '=?',
+                maxDate: '=?'
             },
             link: function(scope, element, attrs, ngModel) {
 
+                var template = angular.element($templateCache.get('datepicker.html'));
                 var today = moment.utc();
                 var dateSelected = '';
+
+                // Default options
+                scope.allowFuture = angular.isDefined(scope.allowFuture) ? scope.allowFuture : true;
+                scope.dateFormat = angular.isDefined(scope.dateFormat) ? scope.dateFormat : false;
 
                 // Data
                 scope.calendarCursor  = today;
                 scope.currentWeeks    = [];
-                scope.daysNameList    = [];
+                scope.daysNameList    = datesCalculator.getDaysNames();
                 scope.monthsList      = moment.months();
-                scope.yearsList       = [];
+                scope.yearsList       = datesCalculator.getYearsList();
 
                 // Display
                 scope.pickerDisplayed = false;
 
-                // List all days name in the current locale
-                for (var i = 0; i < 7 ; i++) {
-                    scope.daysNameList  .push(moment().weekday(i).format('ddd'));
-                }
-
-                for (var i = 2005; i <= moment().year(); i++) {
-                    scope.yearsList.push(i);
-                }
-
                 scope.$watch(function(){ return ngModel.$modelValue; }, function(value){
-                    if(moment.isDate(value)){
-                        dateSelected = scope.calendarCursor = moment.utc(value);
+                    if(value){
+                        dateSelected = scope.calendarCursor = moment.utc(value, scope.dateFormat);
                     }
+                });
+
+                scope.$watch('calendarCursor', function(val){
+                    scope.currentWeeks = getWeeks(val);
                 });
 
                 // Ng change enabled ?
@@ -55,26 +56,21 @@
                 //     scope.$eval(attrs.ngChange);
                 // });
 
-                element.bind('click', function() {
+                // ClickOutside
+                element.bind('click', function(e) {
+                    e.stopPropagation();
                     scope.$apply(function(){
                         scope.pickerDisplayed = true;
-                        // $document.on('click', function (e) {
-                        //     if (element !== e.target && !element[0].contains(e.target)) {
-                        //         scope.$apply(function () {
-                        //             scope.pickerDisplayed = false;
-                        //         });
-                        //      }
-                        // });
-                    });
-                });
-
-                scope.$watch('pickerDisplayed', function(val){
-                    if(val){
-                        var isHover = false;
-                        element.bind('mouseenter mouseleave', function(){
-                            isHover = !isHover;
+                        $document.bind('click', function (e) {
+                            if (template !== e.target && !template[0].contains(e.target)) {
+                                $document.unbind('click');
+                                scope.$apply(function () {
+                                    scope.calendarCursor = dateSelected ? dateSelected : today;
+                                    scope.pickerDisplayed = scope.showMonthsList = scope.showYearsList = false;
+                                });
+                             }
                         });
-                    }
+                    });
                 });
 
                 init();
@@ -85,7 +81,6 @@
                  */
                 scope.prevMonth = function() {
                     scope.calendarCursor = moment(scope.calendarCursor).subtract(1, 'months');
-                    scope.currentWeeks = getWeeks(scope.calendarCursor);
                 };
 
                 /**
@@ -94,7 +89,6 @@
                  */
                 scope.nextMonth = function nextMonth() {
                     scope.calendarCursor = moment(scope.calendarCursor).add(1, 'months');
-                    scope.currentWeeks = getWeeks(scope.calendarCursor);
                 };
 
                 /**
@@ -103,8 +97,8 @@
                  * @return {}
                  */
                 scope.selectMonth = function selectMonth(month) {
+                    scope.showMonthsList = false;
                     scope.calendarCursor = moment(scope.calendarCursor).month(month);
-                    scope.currentWeeks = getWeeks(scope.calendarCursor);
                 };
 
                 /**
@@ -113,8 +107,8 @@
                  * @return {}
                  */
                 scope.selectYear = function selectYear(year) {
+                    scope.showYearsList = false;
                     scope.calendarCursor = moment(scope.calendarCursor).year(year);
-                    scope.currentWeeks = getWeeks(scope.calendarCursor);
                 };
 
                 /**
@@ -123,10 +117,13 @@
                  * @return {[type]}     [description]
                  */
                 scope.selectDay = function(day) {
-                    console.log('Hello', day);
-                    ngModel.$setViewValue(day.date);
-                    ngModel.$render();
-                    scope.pickerDisplayed = false;
+                    if (!day.isFuture || (scope.allowFuture && day.isFuture)) {
+                        resetSelectedDays();
+                        day.isSelected = true;
+                        ngModel.$setViewValue(moment.utc(day.date).format(scope.dateFormat));
+                        ngModel.$render();
+                        scope.pickerDisplayed = false;
+                    }
                 };
 
                 /**
@@ -134,15 +131,13 @@
                  * @return {}
                  */
                 function init() {
-                    var template = angular.element($templateCache.get('datepicker.html'));
+
                     $compile(template)(scope);
                     element.after(template);
 
                     if (angular.isDefined(ngModel.$modelValue) && moment.isDate(ngModel.$modelValue)) {
                         scope.calendarCursor = ngModel.$modelValue;
                     }
-
-                    scope.currentWeeks = getWeeks(scope.calendarCursor);
                 }
 
                 /**
@@ -183,6 +178,14 @@
                     }
 
                     return weeks;
+                }
+
+                function resetSelectedDays () {
+                    scope.currentWeeks.forEach(function(week, wIndex){
+                        week.forEach(function(day, dIndex){
+                            scope.currentWeeks[wIndex][dIndex].isSelected = false;
+                        });
+                    });
                 }
             }
         };
