@@ -37,9 +37,11 @@ gulp.task('sass', function(){
     return gulp.src(paths.src.scss)
         .pipe($.plumber(plumberErrorHandler))
         .pipe($.sass({ outputStyle: 'expanded' }))
-        .pipe($.csso())
         .pipe($.autoprefixer({ browsers: ['last 2 versions'] }))
         .pipe($.rename('ng-datepicker.css'))
+        .pipe(gulp.dest(paths.dist))
+        .pipe($.csso())
+        .pipe($.rename('ng-datepicker.min.css'))
         .pipe(gulp.dest(paths.dist));
 });
 
