@@ -1,7 +1,18 @@
 'use strict';
 
+var es   = require('event-stream');
 var gulp = require('gulp');
 var $    = require('gulp-load-plugins')();
+
+var paths = {
+    src: {
+        html: __dirname+'/src/templates/**/*.html',
+        js: __dirname+'/src/js/**/*.js',
+        scss: __dirname+'/src/scss/**/*.scss'
+    },
+    tmp: __dirname+'/.tmp/',
+    dist: __dirname+'/dist/'
+};
 
 var plumberErrorHandler = {
     errorHandler: function (err) {
@@ -11,28 +22,41 @@ var plumberErrorHandler = {
 };
 
 gulp.task('js', function(){
-    return gulp.src(__dirname+'/src/js/**/*.js')
+    return es.merge(getTemplatesStream(), gulp.src(paths.src.js))
         .pipe($.plumber(plumberErrorHandler))
-        .pipe($.rename('ng-datepicker.js'))
-        .pipe(gulp.dest(__dirname+'/dist/'));
+        .pipe($.angularFilesort())
+        .pipe($.ngAnnotate())
+        .pipe($.concat('ng-datepicker.js'))
+        .pipe(gulp.dest(paths.dist))
+        .pipe($.uglify())
+        .pipe($.rename('ng-datepicker.min.js'))
+        .pipe(gulp.dest(paths.dist));
 });
 
 gulp.task('sass', function(){
-    return gulp.src(__dirname+'/src/scss/**/*.scss')
+    return gulp.src(paths.src.scss)
         .pipe($.plumber(plumberErrorHandler))
         .pipe($.sass({ outputStyle: 'expanded' }))
+        .pipe($.csso())
         .pipe($.rename('ng-datepicker.css'))
-        .pipe(gulp.dest(__dirname+'/dist/'));
+        .pipe(gulp.dest(paths.dist));
 });
 
 /**
  * Watch
  */
 gulp.task('watch', function(){
-    $.watch(__dirname+'/src/scss/**/*.scss', $.batch(function(events, done){
+    $.watch(paths.src.scss, $.batch(function(events, done){
         gulp.start('sass', done);
     }));
-    $.watch(__dirname+'/src/js/**/*.js', $.batch(function(events, done){
+    $.watch([paths.src.js, paths.src.html], $.batch(function(events, done){
         gulp.start('js', done);
     }));
 });
+
+function getTemplatesStream() {
+    return gulp.src(paths.src.html)
+        .pipe($.angularTemplatecache('templates.js', {
+            module: 'ngDatepicker'
+        }));
+}

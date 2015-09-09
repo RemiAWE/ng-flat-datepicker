@@ -1,0 +1,36 @@
+<div class="ng-datepicker" ng-show="pickerDisplayed">
+    <div class="mb-table-header-bckgrnd"></div>
+    <table>
+        <caption>
+            <div class="header-year-wrapper">
+                <span style="display: inline-block; float: left; cursor: pointer" class="noselect" ng-click="prevMonth()"><svg class="icon-select-arrow-right"><symbol id="icon-select-arrow-right" viewBox="0 0 1024 1024">
+	<title>select-arrow-right</title>
+	<path class="path1" d="M350.293 707.627l195.627-195.627-195.627-195.627 60.373-60.373 256 256-256 256z"></path>
+</symbol></svg></span>
+                <div class="header-year noselect" ng-class="noselect">
+                    <div class="mb-custom-select-box" outside-click="showMonthsList = false">
+                        <span class="ng-custom-select-title mb-month-name" ng-click="showMonthsList = !showMonthsList; showYearsList = false" ng-class="{selected: showMonthsList }">{{ calendarCursor.format('MMMM') }}</span>
+                        <div class="mb-custom-select" ng-show="showMonthsList">
+                            <span ng-repeat="monthName in monthsList" ng-click="selectMonth(monthName)">{{ monthName }}</span>
+                        </div>
+                    </div>
+                    <div class="mb-custom-select-box" outside-click="showYearsList = false">
+                        <span class="ng-custom-select-title" ng-click="showYearsList = !showYearsList; showMonthsList = false" ng-class="{selected: showYearsList }">{{ calendarCursor.format('YYYY') }}</span>
+                        <div class="mb-custom-select" ng-show="showYearsList">
+                            <span ng-repeat="yearNumber in yearsList" ng-click="selectYear(yearNumber)">{{ yearNumber }}</span>
+                        </div>
+                    </div>
+                </div>
+                <span style="display: inline-block; float: right; cursor: pointer" class="noselect" ng-click="nextMonth()">></span>
+            </div>
+        </caption>
+        <tbody>
+            <tr class="days-head">
+                <td class="day-head" ng-repeat="dayName in daysNameList">{{ dayName }}</td>
+            </tr>
+            <tr class="days" ng-repeat="week in currentWeeks">
+                <td ng-repeat="day in week" ng-click="selectDay(day)" ng-class="['day-item', { 'isToday': day.isToday, 'isInMonth': day.isInMonth, 'isFuture': day.isFuture && !allowFuture, 'day-selected': day.isSelected }]">{{ day.date | date:'dd' }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

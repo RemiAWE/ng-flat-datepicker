@@ -3,18 +3,25 @@
     <head>
         <meta charset="utf-8">
         <title>Ng-datepicker demo</title>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,300,600' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="../dist/ng-datepicker.css">
+        <style>
+            * { font-family: 'Open Sans'; }
+        </style>
     </head>
-    <body ng-app="testApp">
+    <body ng-app="testApp" ng-strict-di>
 
         <h1>Ng datepicker demo</h1>
 
-        <input ng-datepicker type="text" name="date" ng-model="date">
+        <input ng-datepicker type="text" name="date" ng-model="date" allow-future="false">
 
         <!-- JS -->
         <script src="../node_modules/moment/moment.js"></script>
         <script src="../node_modules/moment/locale/fr.js"></script>
         <script src="../node_modules/angular/angular.js"></script>
+
         <script src="../dist/ng-datepicker.js"></script>
+
         <script src="js/app.js"></script>
     </body>
 </html>
