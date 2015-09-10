@@ -23,13 +23,15 @@
             },
             link: function(scope, element, attrs, ngModel) {
 
-                var template = angular.element($templateCache.get('datepicker.html'));
-                var today = moment.utc();
+                var template     = angular.element($templateCache.get('datepicker.html'));
                 var dateSelected = '';
+                var today        = moment.utc();
 
                 // Default options
                 scope.allowFuture = angular.isDefined(scope.allowFuture) ? scope.allowFuture : true;
-                scope.dateFormat = angular.isDefined(scope.dateFormat) ? scope.dateFormat : false;
+                scope.dateFormat  = angular.isDefined(scope.dateFormat)  ? scope.dateFormat  : false;
+                scope.minDate     = angular.isDefined(scope.minDate)     ? moment.utc(scope.minDate).subtract(1, 'day') : false;
+                scope.maxDate     = angular.isDefined(scope.maxDate)     ? moment.utc(scope.maxDate).add(1, 'day') : false;
 
                 // Data
                 scope.calendarCursor  = today;
@@ -42,12 +44,13 @@
                 scope.pickerDisplayed = false;
 
                 scope.$watch(function(){ return ngModel.$modelValue; }, function(value){
-                    if(value){
+                    if (value) {
                         dateSelected = scope.calendarCursor = moment.utc(value, scope.dateFormat);
                     }
                 });
 
                 scope.$watch('calendarCursor', function(val){
+                    scope.getMonths =
                     scope.currentWeeks = getWeeks(val);
                 });
 
@@ -56,7 +59,9 @@
                 //     scope.$eval(attrs.ngChange);
                 // });
 
-                // ClickOutside
+                /**
+                 * ClickOutside, handle all clicks outside the DatePicker when visible
+                 */
                 element.bind('click', function(e) {
                     e.stopPropagation();
                     scope.$apply(function(){
@@ -161,12 +166,17 @@
 
                     for (var start = moment(startDay); start.isBefore(moment(endDay).add(1, 'days')); start.add(1, 'days')) {
 
+                        var afterMinDate  = !scope.minDate || start.isAfter(scope.minDate, 'day');
+                        var beforeMaxDate = !scope.maxDate || start.isBefore(scope.maxDate, 'day');
+                        var isFuture      = start.isAfter(today);
+                        var beforeFuture  = scope.allowFuture || !isFuture;
+
                         var day = {
                             date: moment(start).toDate(),
                             isToday: start.isSame(today, 'day'),
                             isInMonth: start.isSame(firstDayOfMonth, 'month'),
                             isSelected: start.isSame(dateSelected, 'day'),
-                            isFuture: start.isAfter(today)
+                            isSelectable: afterMinDate && beforeMaxDate && beforeFuture
                         };
 
                         currentWeek.push(day);
@@ -180,6 +190,9 @@
                     return weeks;
                 }
 
+                /**
+                 * Reset all selected days
+                 */
                 function resetSelectedDays () {
                     scope.currentWeeks.forEach(function(week, wIndex){
                         week.forEach(function(day, dIndex){

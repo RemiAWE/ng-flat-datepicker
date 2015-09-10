@@ -11,9 +11,13 @@
     </head>
     <body ng-app="testApp" ng-strict-di>
 
-        <h1>Ng datepicker demo</h1>
+        <div ng-controller="mainController">
 
-        <input ng-datepicker type="text" name="date" ng-model="date" allow-future="false" date-format="'DD/MM/YYYY'">
+            <h1>Ng datepicker demo</h1>
+
+            <input ng-datepicker type="text" name="date" ng-model="date" allow-future="true" min-date="minDate" max-date="maxDate" date-format="'DD/MM/YYYY'">
+
+        </div>
 
         <!-- JS -->
         <script src="../node_modules/moment/moment.js"></script>

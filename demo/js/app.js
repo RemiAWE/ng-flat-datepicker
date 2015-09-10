@@ -10,12 +10,17 @@
         .controller('mainController', ['$scope', mainController]);
 
     function mainController ($scope) {
+
         $scope.date = '';
 
-        $scope.$watch('date', function(val) {
-            $scope.date = $filter('date')($scope.date, 'mediumDate');
-        });
-        console.log('Test APp');
+        // $scope.minDate = moment.utc('2015-09-04');
+        // $scope.maxDate = moment.utc('2015-09-22');
+
+        // console.log($scope.minDate);
+
+        // $scope.$watch('date', function(val) {
+        //     $scope.date = $filter('date')($scope.date, 'mediumDate');
+        // });
     }
 
 })();
