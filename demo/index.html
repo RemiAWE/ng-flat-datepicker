@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Ng-datepicker demo</title>
+        <title>Ng-flat-datepicker demo</title>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,300,600' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="../dist/ng-datepicker.css">
+        <link rel="stylesheet" href="../dist/ng-flat-datepicker.css">
         <style>
             * { font-family: 'Open Sans'; }
         </style>
@@ -15,9 +15,12 @@
 
             <h1>Ng datepicker demo</h1>
 
-            <input ng-datepicker type="text" name="date" ng-model="date" allow-future="true" min-date="minDate" max-date="maxDate" date-format="'DD/MM/YYYY'">
+            <input ng-flat-datepicker type="text" name="date" ng-model="date" allow-future="true" min-date="minDate" max-date="maxDate" date-format="'DD/MM/YYYY'">
             or
-            <button ng-datepicker ng-model="date2" type="button" name="button">Pick a date</button>
+            <button ng-flat-datepicker ng-model="date2" type="button" name="button">Pick a date</button>
+
+            <p>Ng-model input: {{ date | json }}</p>
+            <p>Ng-model button: {{ date2 | json }}</p>
         </div>
 
         <!-- JS -->
@@ -25,7 +28,7 @@
         <script src="../node_modules/moment/locale/fr.js"></script>
         <script src="../node_modules/angular/angular.js"></script>
 
-        <script src="../dist/ng-datepicker.js"></script>
+        <script src="../dist/ng-flat-datepicker.js"></script>
 
         <script src="js/app.js"></script>
     </body>

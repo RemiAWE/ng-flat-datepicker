@@ -26,10 +26,10 @@ gulp.task('js', function(){
         .pipe($.plumber(plumberErrorHandler))
         .pipe($.angularFilesort())
         .pipe($.ngAnnotate())
-        .pipe($.concat('ng-datepicker.js'))
+        .pipe($.concat('ng-flat-datepicker.js'))
         .pipe(gulp.dest(paths.dist))
         .pipe($.uglify())
-        .pipe($.rename('ng-datepicker.min.js'))
+        .pipe($.rename('ng-flat-datepicker.min.js'))
         .pipe(gulp.dest(paths.dist));
 });
 
@@ -38,10 +38,10 @@ gulp.task('sass', function(){
         .pipe($.plumber(plumberErrorHandler))
         .pipe($.sass({ outputStyle: 'expanded' }))
         .pipe($.autoprefixer({ browsers: ['last 2 versions'] }))
-        .pipe($.rename('ng-datepicker.css'))
+        .pipe($.rename('ng-flat-datepicker.css'))
         .pipe(gulp.dest(paths.dist))
         .pipe($.csso())
-        .pipe($.rename('ng-datepicker.min.css'))
+        .pipe($.rename('ng-flat-datepicker.min.css'))
         .pipe(gulp.dest(paths.dist));
 });
 
@@ -60,6 +60,6 @@ gulp.task('watch', function(){
 function getTemplatesStream() {
     return gulp.src(paths.src.html)
         .pipe($.angularTemplatecache('templates.js', {
-            module: 'ngDatepicker'
+            module: 'ngFlatDatepicker'
         }));
 }

@@ -4,7 +4,7 @@ $table-padding: 14px;
 $font-color: #384146;
 $default-color: #0093de; // Blue
 
-.ng-datepicker-wrapper {
+.ng-flat-datepicker-wrapper {
     display: inline-block;
     position: relative;
     * {
@@ -12,14 +12,14 @@ $default-color: #0093de; // Blue
     }
 }
 
-.ng-datepicker {
+.ng-flat-datepicker {
     margin-top: 10px;
     width: $width;
     position: absolute;
     background-color: white;
     z-index: 3000;
     box-shadow: 1px 1px 7px 0px rgba(37, 53, 50, 0.37);
-    .ng-datepicker-table-header-bckgrnd {
+    .ng-flat-datepicker-table-header-bckgrnd {
         height: $header-h;
         background-color: $default-color;
     }
@@ -35,20 +35,20 @@ $default-color: #0093de; // Blue
             height: $header-h;
             display: block;
             padding: 0!important;
-            .ng-datepicker-header-wrapper {
+            .ng-flat-datepicker-header-wrapper {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 height: $header-h;
                 color: white;
                 font-size: 22px;
-                .ng-datepicker-header-year {
+                .ng-flat-datepicker-header-year {
                     display: flex;
                     padding-top: 1px;
                     padding-bottom: 0!important;
                     text-align: center;
                 }
-                .ng-datepicker-header-nav-wrapper {
+                .ng-flat-datepicker-header-nav-wrapper {
                     padding-top: 5px;
                     padding-bottom: 5px;
                     color: #626262;
@@ -127,7 +127,7 @@ $default-color: #0093de; // Blue
     }
 }
 
-.ng-datepicker-arrow {
+.ng-flat-datepicker-arrow {
     user-select: none;
     height: 27px;
     svg {
@@ -141,14 +141,14 @@ $default-color: #0093de; // Blue
         }
     }
 
-    &.ng-datepicker-arrow-left {
+    &.ng-flat-datepicker-arrow-left {
         svg {
             transform: rotate(180deg);
         }
     }
 }
 
-.ng-datepicker-custom-select-title {
+.ng-flat-datepicker-custom-select-title {
     padding: 3px 5px 4px 5px;
     border: 1px solid $default-color;
     border-radius: 3px;
@@ -161,16 +161,16 @@ $default-color: #0093de; // Blue
         border-color: white!important;
     }
 }
-.ng-datepicker-custom-select-box {
+.ng-flat-datepicker-custom-select-box {
     position: relative;
     padding: 5px 0;
     &:first-of-type {
-        .ng-datepicker-custom-select-title,
-        .ng-datepicker-custom-select {
+        .ng-flat-datepicker-custom-select-title,
+        .ng-flat-datepicker-custom-select {
             min-width: 80px;
         }
     }
-    .ng-datepicker-custom-select {
+    .ng-flat-datepicker-custom-select {
         position: absolute;
         border-radius: 2px;
         cursor: pointer;
@@ -206,6 +206,6 @@ $default-color: #0093de; // Blue
     }
 }
 
-.ng-datepicker-month-name::first-letter {
+.ng-flat-datepicker-month-name::first-letter {
     text-transform: uppercase;
 }

@@ -7,7 +7,7 @@
      */
 
      angular
-         .module('ngDatepicker')
+         .module('ngFlatDatepicker')
          .factory('datesCalculator', datesCalculator);
 
     function datesCalculator () {

@@ -1,5 +1,5 @@
 {
-  "name": "ng-datepicker",
+  "name": "ng-flatdatepicker",
   "version": "0.0.1",
   "description": "Angular.js Datepicker built with Moment.js",
   "main": "index.js",
@@ -18,7 +18,7 @@
     "moment"
   ],
   "author": "Rémi Chanaud",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/RemiAWE/ng-datepicker/issues"
   },

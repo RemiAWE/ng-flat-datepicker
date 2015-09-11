@@ -8,10 +8,10 @@
      */
 
     angular
-        .module('ngDatepicker', [])
-        .directive('ngDatepicker', ngDatepickerDirective);
+        .module('ngFlatDatepicker', [])
+        .directive('ngFlatDatepicker', ngFlatDatepickerDirective);
 
-    function ngDatepickerDirective($templateCache, $compile, $document, datesCalculator) {
+    function ngFlatDatepickerDirective($templateCache, $compile, $document, datesCalculator) {
         return {
             restrict: 'A',
             require: 'ngModel',
@@ -137,7 +137,7 @@
                  */
                 function init() {
 
-                    element.wrap('<div class="ng-datepicker-wrapper"></div>');
+                    element.wrap('<div class="ng-flat-datepicker-wrapper"></div>');
 
                     $compile(template)(scope);
                     element.after(template);
