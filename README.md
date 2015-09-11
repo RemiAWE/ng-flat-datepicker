@@ -5,16 +5,16 @@ Simple Angular.js datepicker directive built with Moment.js.
 
 ![ng-flat-datepicker screenshot](http://i.imgur.com/m9Aawf2.png)
 
+## Demo
+
+[See demo](http://remiawe.github.io/ng-flat-datepicker/)
+
 ### Features
 * Custom ng-model date format: custom string or js date
 * Min date / Max date
 * Allow/disallow future date selection
 * Quick selection of month and year
 * Locale aware (Angular and Moment locale)
-
-## Demo
-
-[See demo](http://remiawe.github.io/ng-flat-datepicker/)
 
 ## Requirements
 * Angularjs >=1.2
