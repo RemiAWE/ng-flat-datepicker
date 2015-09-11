@@ -14,7 +14,7 @@ Simple Angular.js datepicker directive built with Moment.js.
 
 ## Demo
 
-LINK Github page
+[See demo](http://remiawe.github.io/ng-flat-datepicker/)
 
 ## Requirements
 * Angularjs >=1.2
