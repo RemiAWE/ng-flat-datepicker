@@ -1,0 +1,24 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RemiAWE/ng-flat-datepicker.git"
+  },
+  "author": "Rémi Chanaud <rchanaud@awe.fr>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RemiAWE/ng-flat-datepicker/issues"
+  },
+  "homepage": "https://github.com/RemiAWE/ng-flat-datepicker#readme",
+  "dependencies": {
+    "angular": "^1.4.5",
+    "moment": "^2.10.6",
+    "ng-flat-datepicker": "0.0.1"
+  }
+}

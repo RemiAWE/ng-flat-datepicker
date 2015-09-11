@@ -1,0 +1,211 @@
+$width: 290px;
+$header-h: 65px;
+$table-padding: 14px;
+$font-color: #384146;
+$default-color: #0093de; // Blue
+
+.ng-flat-datepicker-wrapper {
+    display: inline-block;
+    position: relative;
+    * {
+        box-sizing: border-box;
+    }
+}
+
+.ng-flat-datepicker {
+    margin-top: 10px;
+    width: $width;
+    position: absolute;
+    background-color: white;
+    z-index: 3000;
+    box-shadow: 1px 1px 7px 0px rgba(37, 53, 50, 0.37);
+    .ng-flat-datepicker-table-header-bckgrnd {
+        height: $header-h;
+        background-color: $default-color;
+    }
+    table {
+        margin-top: -$header-h;
+        padding-right: $table-padding;
+        padding-left: $table-padding;
+        padding-bottom: $table-padding;
+        table-layout:fixed;
+        border-collapse:collapse;
+        display: block;
+        caption {
+            height: $header-h;
+            display: block;
+            padding: 0!important;
+            .ng-flat-datepicker-header-wrapper {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                height: $header-h;
+                color: white;
+                font-size: 22px;
+                .ng-flat-datepicker-header-year {
+                    display: flex;
+                    padding-top: 1px;
+                    padding-bottom: 0!important;
+                    text-align: center;
+                }
+                .ng-flat-datepicker-header-nav-wrapper {
+                    padding-top: 5px;
+                    padding-bottom: 5px;
+                    color: #626262;
+                    font-size: 22px;
+                    background-color: #E8E8E8;
+                    span {
+                        user-select: none;
+                    }
+                }
+            }
+        }
+        tbody {
+            margin: 0 auto;
+            padding-top: $table-padding;
+            width: ($width - (2 * $table-padding));
+            display: block;
+            tr {
+                height: ($width - (2 * $table-padding))/7;
+                width: ($width - (2 * $table-padding));
+                &.days-head {
+                    height: ($width - (2 * $table-padding))/7 + 8; // yo - lo
+                    .day-head {
+                        padding: 0;
+                        padding-bottom: $table-padding;
+                        border-bottom: 1px solid #d8d8d8;
+                        color: $font-color;
+                    }
+                }
+                &.days .day-item:hover{
+                    background-color: #0093de;
+                    color: #f5f5f5!important;
+                }
+                td {
+                    width:  ($width - (2 * $table-padding))/7;
+                    text-align: center;
+                    background-color: white;
+                    font-size: 12px;
+                    display: inline-block;
+                    cursor: default;
+                    color: $font-color;
+                    user-select: none;
+                    &.day-item,
+                    &.disabled {
+                        padding: 0;
+                        height: ($width - (2 * $table-padding))/7;
+                        line-height: ($width - (2 * $table-padding))/7;
+                        cursor: pointer;
+                        border-radius: ($width - (2 * $table-padding))/14;
+                        color: lighten($font-color, 35%);
+                        &.day {
+                            color: $font-color;
+                        }
+                        &.isToday {
+                            color: #1b1b1b;
+                            font-weight: 700;
+                        }
+                        &.isSelected {
+                            background-color: #0093de;
+                            color: #f5f5f5!important;
+                        }
+                        &.isInMonth {
+                            color: $font-color;
+                        }
+                        &.isDisabled {
+                            cursor: default;
+                            color: lighten($font-color, 65%);
+                            &:hover {
+                                color: lighten($font-color, 65%) !important;
+                                background-color: transparent;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.ng-flat-datepicker-arrow {
+    user-select: none;
+    height: 27px;
+    svg {
+        width: 27px;
+        height: 27px;
+        fill: white;
+        cursor: pointer;
+        padding:5px;
+        &:hover {
+            fill: rgba(255,255,255,.5);
+        }
+    }
+
+    &.ng-flat-datepicker-arrow-left {
+        svg {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.ng-flat-datepicker-custom-select-title {
+    padding: 3px 5px 4px 5px;
+    border: 1px solid $default-color;
+    border-radius: 3px;
+    line-height: 22px;
+    font-size: 22px;
+    display: inline-block;
+    cursor: pointer;
+    &.selected,
+    &:hover {
+        border-color: white!important;
+    }
+}
+.ng-flat-datepicker-custom-select-box {
+    position: relative;
+    padding: 5px 0;
+    &:first-of-type {
+        .ng-flat-datepicker-custom-select-title,
+        .ng-flat-datepicker-custom-select {
+            min-width: 80px;
+        }
+    }
+    .ng-flat-datepicker-custom-select {
+        position: absolute;
+        border-radius: 2px;
+        cursor: pointer;
+        width: 100%;
+        background-color: rgb(240,240,240);
+        z-index: 1;
+        span {
+            padding-top: 6px;
+            padding-bottom: 5px;
+            display: block;
+            text-align: center;
+            font-size: 13px;
+            line-height: 13px;
+            cursor: pointer;
+            color: #737373;
+            font-weight: 400;
+            &::first-letter { text-transform: uppercase; }
+            &:first-of-type {
+                padding-top: 10px;
+                border-top-right-radius: 2px;
+                border-top-left-radius: 2px;
+            }
+            &:last-of-type  {
+                padding-bottom: 10px;
+                border-bottom-right-radius: 2px;
+                border-bottom-left-radius: 2px;
+            }
+            &:hover {
+                background-color: white;
+                color: #15A5DB;
+            }
+        }
+    }
+}
+
+.ng-flat-datepicker-month-name::first-letter {
+    text-transform: uppercase;
+}
