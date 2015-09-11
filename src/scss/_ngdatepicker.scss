@@ -7,6 +7,9 @@ $default-color: #0093de; // Blue
 .ng-datepicker-wrapper {
     display: inline-block;
     position: relative;
+    * {
+        box-sizing: border-box;
+    }
 }
 
 .ng-datepicker {

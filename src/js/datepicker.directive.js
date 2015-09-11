@@ -50,7 +50,6 @@
                 });
 
                 scope.$watch('calendarCursor', function(val){
-                    scope.getMonths =
                     scope.currentWeeks = getWeeks(val);
                 });
 
@@ -63,20 +62,21 @@
                  * ClickOutside, handle all clicks outside the DatePicker when visible
                  */
                 element.bind('click', function(e) {
-                    e.stopPropagation();
                     scope.$apply(function(){
                         scope.pickerDisplayed = true;
-                        $document.bind('click', function (e) {
-                            if (template !== e.target && !template[0].contains(e.target)) {
-                                $document.unbind('click');
-                                scope.$apply(function () {
-                                    scope.calendarCursor = dateSelected ? dateSelected : today;
-                                    scope.pickerDisplayed = scope.showMonthsList = scope.showYearsList = false;
-                                });
-                             }
-                        });
+                        $document.on('click', onDocumentClick);
                     });
                 });
+
+                function onDocumentClick(e) {
+                    if (template !== e.target && !template[0].contains(e.target) && e.target !== element[0]) {
+                        $document.off('click', onDocumentClick);
+                        scope.$apply(function () {
+                            scope.calendarCursor = dateSelected ? dateSelected : today;
+                            scope.pickerDisplayed = scope.showMonthsList = scope.showYearsList = false;
+                        });
+                     }
+                }
 
                 init();
 
@@ -138,7 +138,7 @@
                 function init() {
 
                     element.wrap('<div class="ng-datepicker-wrapper"></div>');
-                    
+
                     $compile(template)(scope);
                     element.after(template);
 

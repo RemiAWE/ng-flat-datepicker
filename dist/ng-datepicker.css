@@ -3,6 +3,10 @@
   position: relative;
 }
 
+.ng-datepicker-wrapper * {
+  box-sizing: border-box;
+}
+
 .ng-datepicker {
   margin-top: 10px;
   width: 290px;
