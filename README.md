@@ -3,7 +3,7 @@ ng-flat-datepicker
 
 Simple Angular.js datepicker directive built with Moment.js.
 
-![ng-flat-datepicker screenshot](http://i.imgur.com/4vl5k3c.png)
+![ng-flat-datepicker screenshot](http://i.imgur.com/m9Aawf2.png)
 
 ### Features
 * Custom ng-model date format: custom string or js date
