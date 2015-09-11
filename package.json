@@ -1,6 +1,6 @@
 {
   "name": "ng-flat-datepicker",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Angular.js Datepicker built with Moment.js",
   "main": "index.js",
   "scripts": {
