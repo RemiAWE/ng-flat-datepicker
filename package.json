@@ -1,5 +1,5 @@
 {
-  "name": "ng-flatdatepicker",
+  "name": "ng-flat-datepicker",
   "version": "0.0.1",
   "description": "Angular.js Datepicker built with Moment.js",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RemiAWE/ng-datepicker.git"
+    "url": "git+https://github.com/RemiAWE/ng-flat-datepicker.git"
   },
   "keywords": [
     "angular.js",
@@ -20,9 +20,9 @@
   "author": "Rémi Chanaud",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/RemiAWE/ng-datepicker/issues"
+    "url": "https://github.com/RemiAWE/ng-flat-datepicker/issues"
   },
-  "homepage": "https://github.com/RemiAWE/ng-datepicker#readme",
+  "homepage": "https://github.com/RemiAWE/ng-flat-datepicker#readme",
   "dependencies": {},
   "devDependencies": {
     "angular": "^1.4.5",
