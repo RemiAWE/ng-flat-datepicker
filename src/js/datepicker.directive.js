@@ -137,6 +137,8 @@
                  */
                 function init() {
 
+                    element.wrap('<div class="ng-datepicker-wrapper"></div>');
+                    
                     $compile(template)(scope);
                     element.after(template);
 

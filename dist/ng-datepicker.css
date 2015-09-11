@@ -1,3 +1,8 @@
+.ng-datepicker-wrapper {
+  display: inline-block;
+  position: relative;
+}
+
 .ng-datepicker {
   margin-top: 10px;
   width: 290px;
@@ -28,7 +33,7 @@
   padding: 0 !important;
 }
 
-.ng-datepicker table caption .header-wrapper {
+.ng-datepicker table caption .ng-datepicker-header-wrapper {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -43,7 +48,7 @@
   font-size: 22px;
 }
 
-.ng-datepicker table caption .header-wrapper .header-year {
+.ng-datepicker table caption .ng-datepicker-header-wrapper .ng-datepicker-header-year {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -52,7 +57,7 @@
   text-align: center;
 }
 
-.ng-datepicker table caption .header-wrapper .header-nav-wrapper {
+.ng-datepicker table caption .ng-datepicker-header-wrapper .ng-datepicker-header-nav-wrapper {
   padding-top: 5px;
   padding-bottom: 5px;
   color: #626262;
@@ -60,7 +65,7 @@
   background-color: #E8E8E8;
 }
 
-.ng-datepicker table caption .header-wrapper .header-nav-wrapper span {
+.ng-datepicker table caption .ng-datepicker-header-wrapper .ng-datepicker-header-nav-wrapper span {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -162,8 +167,8 @@
 }
 
 .ng-datepicker-arrow svg {
-  width: 17px;
-  height: 17px;
+  width: 27px;
+  height: 27px;
   fill: white;
   cursor: pointer;
   padding: 5px;

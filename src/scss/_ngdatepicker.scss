@@ -4,6 +4,11 @@ $table-padding: 14px;
 $font-color: #384146;
 $default-color: #0093de; // Blue
 
+.ng-datepicker-wrapper {
+    display: inline-block;
+    position: relative;
+}
+
 .ng-datepicker {
     margin-top: 10px;
     width: $width;
@@ -27,20 +32,20 @@ $default-color: #0093de; // Blue
             height: $header-h;
             display: block;
             padding: 0!important;
-            .header-wrapper {
+            .ng-datepicker-header-wrapper {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 height: $header-h;
                 color: white;
                 font-size: 22px;
-                .header-year {
+                .ng-datepicker-header-year {
                     display: flex;
                     padding-top: 1px;
                     padding-bottom: 0!important;
                     text-align: center;
                 }
-                .header-nav-wrapper {
+                .ng-datepicker-header-nav-wrapper {
                     padding-top: 5px;
                     padding-bottom: 5px;
                     color: #626262;
@@ -123,8 +128,8 @@ $default-color: #0093de; // Blue
     user-select: none;
     height: 27px;
     svg {
-        width: 17px;
-        height: 17px;
+        width: 27px;
+        height: 27px;
         fill: white;
         cursor: pointer;
         padding:5px;
