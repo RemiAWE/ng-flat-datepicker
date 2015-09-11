@@ -10,13 +10,13 @@
                 </span>
                 <div class="ng-flat-datepicker-header-year">
                     <div class="ng-flat-datepicker-custom-select-box" outside-click="showMonthsList = false">
-                        <span class="ng-flat-datepicker-custom-select-title ng-flat-datepicker-month-name" ng-click="showMonthsList = !showMonthsList; showYearsList = false" ng-class="{selected: showMonthsList }">{{ calendarCursor.format('MMMM') }}</span>
+                        <span class="ng-flat-datepicker-custom-select-title ng-flat-datepicker-month-name" ng-click="showMonthsList = !showMonthsList; showYearsList = false" ng-class="{selected: showMonthsList }">{{ calendarCursor.isValid() ? calendarCursor.format('MMMM') : "" }}</span>
                         <div class="ng-flat-datepicker-custom-select" ng-show="showMonthsList">
                             <span ng-repeat="monthName in monthsList" ng-click="selectMonth(monthName); showMonthsList = false">{{ monthName }}</span>
                         </div>
                     </div>
                     <div class="ng-flat-datepicker-custom-select-box" outside-click="showYearsList = false">
-                        <span class="ng-flat-datepicker-custom-select-title" ng-click="showYearsList = !showYearsList; showMonthsList = false" ng-class="{selected: showYearsList }">{{ calendarCursor.format('YYYY') }}</span>
+                        <span class="ng-flat-datepicker-custom-select-title" ng-click="showYearsList = !showYearsList; showMonthsList = false" ng-class="{selected: showYearsList }">{{ calendarCursor.isValid() ? calendarCursor.format('YYYY') : "" }}</span>
                         <div class="ng-flat-datepicker-custom-select" ng-show="showYearsList">
                             <span ng-repeat="yearNumber in yearsList" ng-click="selectYear(yearNumber)">{{ yearNumber }}</span>
                         </div>
