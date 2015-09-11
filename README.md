@@ -50,7 +50,7 @@ This an attribute only directive.
 ### Locale
 Default locale is english but you can load any locale of your choice (Angular and Moment), the datepicker use the currents locales.
 
-##Contributions
+## Contributions
 Just install the dev dependencies and start a `gulp watch`
 
 ## Credits
