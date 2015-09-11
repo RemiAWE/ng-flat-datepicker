@@ -40,14 +40,14 @@ This an attribute only directive.
 
 ## Options
 
-###Attributes:
+### Attributes:
 
 * `date-format`: **String** - The Moment.js format of the date in the `ng-model`. Eg: `'DD/MM/YYYY'` fallback to js date Object.
 * `min-date`: **Object** - The minimum selectable date. Must be a Moment Date Object.
 * `max-date`: **Object** - The maximum selectable date. Must be a Moment Date Object.
 * `allow-future`: **Boolean** - Maximum selectable date is tomorrow
 
-###Locale
+### Locale
 Default locale is english but you can load any locale of your choice (Angular and Moment), the datepicker use the currents locales.
 
 ##Contributions
