@@ -24,7 +24,7 @@ Simple Angular.js datepicker directive built with Moment.js.
 
 1. `npm install --save ng-flat-datepicker`
 2. Link `/dist/ng-flat-datepicker.js`and `/dist/ng-flat-datepicker.css`
-3. Add the module `'ng-ngFlatDatepicker'` as dependency of your angular module.
+3. Add the module `'ngFlatDatepicker'` as dependency of your angular module.
 
 ## Usage
 
