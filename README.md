@@ -31,7 +31,7 @@ Simple Angular.js datepicker directive built with Moment.js.
 This an attribute only directive.
 
 ```html
-<input type="text ng-model="date" ng-flat-datepicker>
+<input type="text" ng-model="date" ng-flat-datepicker>
 ```
 
 ```html
