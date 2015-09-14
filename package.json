@@ -1,6 +1,6 @@
 {
   "name": "ng-flat-datepicker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Angular.js Datepicker built with Moment.js",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,8 @@
     "angular",
     "datepicker",
     "moment.js",
-    "moment"
+    "moment",
+    "flat"
   ],
   "author": "Rémi Chanaud",
   "license": "MIT",
