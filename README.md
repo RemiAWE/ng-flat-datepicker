@@ -1,7 +1,7 @@
 ng-flat-datepicker
 ===
 
-Simple Angular.js datepicker directive built with Moment.js.
+Lightweight Angular.js datepicker directive built with Moment.js.
 
 ![ng-flat-datepicker screenshot](http://i.imgur.com/m9Aawf2.png)
 
