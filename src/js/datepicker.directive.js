@@ -16,10 +16,7 @@
             restrict: 'A',
             require: 'ngModel',
             scope: {
-                dateFormat: '=?',
-                allowFuture: '=?',
-                minDate: '=?',
-                maxDate: '=?'
+                config: '=datepickerConfig'
             },
             link: function(scope, element, attrs, ngModel) {
 
@@ -28,10 +25,17 @@
                 var today        = moment.utc();
 
                 // Default options
-                scope.allowFuture = angular.isDefined(scope.allowFuture) ? scope.allowFuture : true;
-                scope.dateFormat  = angular.isDefined(scope.dateFormat)  ? scope.dateFormat  : false;
-                scope.minDate     = angular.isDefined(scope.minDate)     ? moment.utc(scope.minDate).subtract(1, 'day') : false;
-                scope.maxDate     = angular.isDefined(scope.maxDate)     ? moment.utc(scope.maxDate).add(1, 'day') : false;
+                var defaultConfig = {
+                    allowFuture: true,
+                    dateFormat: null,
+                    minDate: null,
+                    maxDate: null
+                };
+
+                // Apply and init options
+                scope.config = angular.extend(defaultConfig, scope.config);
+                if (angular.isDefined(scope.config.minDate)) moment.utc(scope.config.minDate).subtract(1, 'day');
+                if (angular.isDefined(scope.config.maxDate)) moment.utc(scope.config.maxDate).add(1, 'day');
 
                 // Data
                 scope.calendarCursor  = today;
@@ -45,7 +49,7 @@
 
                 scope.$watch(function(){ return ngModel.$modelValue; }, function(value){
                     if (value) {
-                        dateSelected = scope.calendarCursor = moment.utc(value, scope.dateFormat);
+                        dateSelected = scope.calendarCursor = moment.utc(value, scope.config.dateFormat);
                     }
                 });
 
@@ -122,10 +126,10 @@
                  * @return {[type]}     [description]
                  */
                 scope.selectDay = function(day) {
-                    if (!day.isFuture || (scope.allowFuture && day.isFuture)) {
+                    if (!day.isFuture || (scope.config.allowFuture && day.isFuture)) {
                         resetSelectedDays();
                         day.isSelected = true;
-                        ngModel.$setViewValue(moment.utc(day.date).format(scope.dateFormat));
+                        ngModel.$setViewValue(moment.utc(day.date).format(scope.config.dateFormat));
                         ngModel.$render();
                         scope.pickerDisplayed = false;
                     }
@@ -168,10 +172,10 @@
 
                     for (var start = moment(startDay); start.isBefore(moment(endDay).add(1, 'days')); start.add(1, 'days')) {
 
-                        var afterMinDate  = !scope.minDate || start.isAfter(scope.minDate, 'day');
-                        var beforeMaxDate = !scope.maxDate || start.isBefore(scope.maxDate, 'day');
+                        var afterMinDate  = !scope.config.minDate || start.isAfter(scope.config.minDate, 'day');
+                        var beforeMaxDate = !scope.config.maxDate || start.isBefore(scope.config.maxDate, 'day');
                         var isFuture      = start.isAfter(today);
-                        var beforeFuture  = scope.allowFuture || !isFuture;
+                        var beforeFuture  = scope.config.allowFuture || !isFuture;
 
                         var day = {
                             date: moment(start).toDate(),
