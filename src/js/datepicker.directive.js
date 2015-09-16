@@ -57,11 +57,6 @@
                     scope.currentWeeks = getWeeks(val);
                 });
 
-                // Ng change enabled ?
-                // ngModelCtrl.$viewChangeListeners.push(function() {
-                //     scope.$eval(attrs.ngChange);
-                // });
-
                 /**
                  * ClickOutside, handle all clicks outside the DatePicker when visible
                  */
