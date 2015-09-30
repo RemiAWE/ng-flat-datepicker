@@ -2,17 +2,7 @@
   "name": "ng-flat-datepicker",
   "version": "0.1.3",
   "description": "Angular.js Datepicker built with Moment.js",
-  "main": [
-    "dist/ng-flat-datepicker.min.js",
-    "dist/ng-flat-datepicker.min.css"
-  ],
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/RemiAWE/ng-flat-datepicker.git"
-  },
+  "homepage": "https://github.com/RemiAWE/ng-flat-datepicker#readme",
   "keywords": [
     "angular.js",
     "angular",
@@ -21,13 +11,19 @@
     "moment",
     "flat"
   ],
+  "main": "dist/ng-flat-datepicker.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RemiAWE/ng-flat-datepicker.git"
+  },
   "author": "Rémi Chanaud",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/RemiAWE/ng-flat-datepicker/issues"
   },
-  "homepage": "https://github.com/RemiAWE/ng-flat-datepicker#readme",
-  "dependencies": {},
   "devDependencies": {
     "angular": "^1.4.5",
     "event-stream": "^3.3.1",
