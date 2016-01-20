@@ -7,6 +7,7 @@
      * @example <ng-datepicker></ng-datepicker>
      */
 
+    ngFlatDatepickerDirective.$inject = ["$templateCache", "$compile", "$document", "datesCalculator"];
     angular
         .module('ngFlatDatepicker', [])
         .directive('ngFlatDatepicker', ngFlatDatepickerDirective);
@@ -22,7 +23,7 @@
 
                 var template     = angular.element($templateCache.get('datepicker.html'));
                 var dateSelected = '';
-                var today        = moment.utc();
+                var today        = moment();
 
                 // Default options
                 var defaultConfig = {
@@ -34,8 +35,8 @@
 
                 // Apply and init options
                 scope.config = angular.extend(defaultConfig, scope.config);
-                if (angular.isDefined(scope.config.minDate)) moment.utc(scope.config.minDate).subtract(1, 'day');
-                if (angular.isDefined(scope.config.maxDate)) moment.utc(scope.config.maxDate).add(1, 'day');
+                if (angular.isDefined(scope.config.minDate)) moment(scope.config.minDate).subtract(1, 'day');
+                if (angular.isDefined(scope.config.maxDate)) moment(scope.config.maxDate).add(1, 'day');
 
                 // Data
                 scope.calendarCursor  = today;
@@ -49,7 +50,7 @@
 
                 scope.$watch(function(){ return ngModel.$modelValue; }, function(value){
                     if (value) {
-                        dateSelected = scope.calendarCursor = moment.utc(value, scope.config.dateFormat);
+                        dateSelected = scope.calendarCursor = moment(value, scope.config.dateFormat);
                     }
                 });
 
@@ -124,7 +125,7 @@
                     if (!day.isFuture || (scope.config.allowFuture && day.isFuture)) {
                         resetSelectedDays();
                         day.isSelected = true;
-                        ngModel.$setViewValue(moment.utc(day.date).format(scope.config.dateFormat));
+                        ngModel.$setViewValue(moment(day.date).format(scope.config.dateFormat));
                         ngModel.$render();
                         scope.pickerDisplayed = false;
                     }
@@ -153,7 +154,7 @@
                 function getWeeks (date) {
 
                     var weeks = [];
-                    var date = moment.utc(date);
+                    var date = moment(date);
                     var firstDayOfMonth = moment(date).date(1);
                     var lastDayOfMonth  = moment(date).date(date.daysInMonth());
 
@@ -204,7 +205,6 @@
             }
         };
     }
-    ngFlatDatepickerDirective.$inject = ["$templateCache", "$compile", "$document", "datesCalculator"];
 
 })();
 
