@@ -177,7 +177,8 @@
                             isToday: start.isSame(today, 'day'),
                             isInMonth: start.isSame(firstDayOfMonth, 'month'),
                             isSelected: start.isSame(dateSelected, 'day'),
-                            isSelectable: afterMinDate && beforeMaxDate && beforeFuture
+                            isSelectable: afterMinDate && beforeMaxDate && beforeFuture,
+                            isFuture: isFuture
                         };
 
                         currentWeek.push(day);
