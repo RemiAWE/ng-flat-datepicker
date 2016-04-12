@@ -121,7 +121,7 @@
                  * @return {[type]}     [description]
                  */
                 scope.selectDay = function(day) {
-                    if (!day.isFuture || (scope.config.allowFuture && day.isFuture)) {
+                    if (day.isSelectable && !day.isFuture || (scope.config.allowFuture && day.isFuture)) {
                         resetSelectedDays();
                         day.isSelected = true;
                         ngModel.$setViewValue(moment.utc(day.date).format(scope.config.dateFormat));
