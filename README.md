@@ -19,7 +19,7 @@ Lightweight Angular.js datepicker directive built with Moment.js for Jalali Cale
 ## Requirements
 * Angularjs >=1.2
 * Moment.js
-* Moment-jalali.js
+* Moment-jalali.js >=0.4.0
 
 ## Installation
 

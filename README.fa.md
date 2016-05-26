@@ -1,7 +1,7 @@
 ng-flat-jalali-datepicker
 ===
 
-یک دایرکتیو دیت پیکر جلالی ساده برای انگولار که از moment.js استفاده می‌کند
+یک دایرکتیو دیت پیکر جلالی ساده برای انگولار که از مومنت.جی اس استفاده می‌کند
 
 ![ng-flat-jalali-datepicker screenshot](http://s7.picofile.com/file/8252672284/taghvim.png)
 
@@ -65,12 +65,13 @@ Eg:`'jDD/jMM/jYYYY'`
 
 ## مشارکت
 برای مشارکت در بهبود این کد پیش‌نیازهای لازم را نصب نموده و سپس دستور زیر را وارد نمایید.
+
 `gulp js && gulp watch`
 
 ## تقدیر و سپاس
-«رمی چاناود» بخاطر کد پروژه اصلی:
+* «رمی چاناود» بخاطر کد پروژه اصلی:
 [RemiAWE](https://github.com/RemiAWE/ng-flat-datepicker)
-«بهرنگ نوروزی نیا» بخاطر پروژه تقویم جلالی بر مبنای مومنت:
+* «بهرنگ نوروزی نیا» بخاطر پروژه تقویم جلالی بر مبنای مومنت:
 [behrang](https://github.com/jalaali/moment-jalaali)
 
 
