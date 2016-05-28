@@ -30,7 +30,7 @@ var plumberErrorHandler = {
     }
 };
 
-gulp.task('copyHtml', function() {
+gulp.task('html', function() {
   gulp.src(paths.src.html).pipe(gulp.dest(paths.demo));
 });
 
@@ -50,10 +50,10 @@ gulp.task('js', ['prerequisitiesJs'], function(){
         .pipe($.plumber(plumberErrorHandler))
         .pipe($.angularFilesort())
         .pipe($.ngAnnotate())
-        .pipe($.concat('ng-jalali-flat-datepicker.js'))
+        .pipe($.concat('ng-jalaali-flat-datepicker.js'))
         .pipe(gulp.dest(paths.dist))
         .pipe($.uglify())
-        .pipe($.rename('ng-jalali-flat-datepicker.min.js'))
+        .pipe($.rename('ng-jalaali-flat-datepicker.min.js'))
         .pipe(gulp.dest(paths.dist));
 });
 
@@ -62,10 +62,10 @@ gulp.task('sass', function(){
         .pipe($.plumber(plumberErrorHandler))
         .pipe($.sass({ outputStyle: 'expanded' }))
         .pipe($.autoprefixer({ browsers: ['last 2 versions'] }))
-        .pipe($.rename('ng-jalali-flat-datepicker.css'))
+        .pipe($.rename('ng-jalaali-flat-datepicker.css'))
         .pipe(gulp.dest(paths.dist))
         .pipe($.csso())
-        .pipe($.rename('ng-jalali-flat-datepicker.min.css'))
+        .pipe($.rename('ng-jalaali-flat-datepicker.min.css'))
         .pipe(gulp.dest(paths.dist));
 });
 
@@ -80,13 +80,13 @@ gulp.task('watch', function(){
       gulp.start('js', done);
     }));
     $.watch([paths.src.html], $.batch(function(events, done) {
-      gulp.start('copyHtml', done);
+      gulp.start('html', done);
     }));
 });
 
 function getTemplatesStream() {
     return gulp.src(paths.src.html_template)
         .pipe($.angularTemplatecache('templates.js', {
-            module: 'ngJalaliFlatDatepicker'
+            module: 'ngJalaaliFlatDatepicker'
         }));
 }

@@ -1,13 +1,13 @@
-ng-flat-jalali-datepicker
+ng-flat-jalaali-datepicker
 ===
 
 یک دایرکتیو دیت پیکر جلالی ساده برای انگولار که از مومنت.جی اس استفاده می‌کند
 
-![ng-flat-jalali-datepicker screenshot](http://s7.picofile.com/file/8252672284/taghvim.png)
+![ng-flat-jalaali-datepicker screenshot](http://s7.picofile.com/file/8252672284/taghvim.png)
 
 ## پیش‌نمایش
 
-[پیش‌نمایشی ببینید](http://thg303.github.io/jalali-datepicker-demo/)
+[پیش‌نمایشی ببینید](http://thg303.github.io/jalaali-datepicker-demo/)
 
 ## امکانات
 * فرمت تاریخ قابل سفارشی سازی خروجی به صورت متن یا ابجکت تاریخ جاوا اسکریپت
@@ -19,13 +19,13 @@ ng-flat-jalali-datepicker
 ## پیش‌نیازها
 * Angularjs >=1.2
 * Moment.js
-* Moment-jalali.js >=0.4.0
+* Moment-jalaali.js >=0.4.0
 
 ## نصب
 
-1. `npm install --save ng-flat-jalali-datepicker`
-2. متصل کردن فایل `/dist/ng-flat-jalali-datepicker.js` و `/dist/ng-flat-jalali-datepicker.css`
-3. اضافه کردن ماجول `'ngFlatJalaliDatepicker'` بعنوان دپندنسی به ماجول انگولار مورد نظر
+1. `npm install --save ng-flat-jalaali-datepicker`
+2. متصل کردن فایل `/dist/ng-flat-jalaali-datepicker.js` و `/dist/ng-flat-jalaali-datepicker.css`
+3. اضافه کردن ماجول `'ngFlatjalaaliDatepicker'` بعنوان دپندنسی به ماجول انگولار مورد نظر
 
 
 ## نحوه استفاده
@@ -33,11 +33,11 @@ ng-flat-jalali-datepicker
 این دایرکتیو فقط به صورت اتریبیوت قابل استفاده است
 
 ```html
-<input type="text" ng-model="date" ng-flat-jalali-datepicker>
+<input type="text" ng-model="date" ng-flat-jalaali-datepicker>
 ```
 
 ```html
-<button ng-model="date" ng-flat-jalali-datepicker>Pick a date</button>
+<button ng-model="date" ng-flat-jalaali-datepicker>Pick a date</button>
 ```
 
 ## آپشن‌ها
@@ -47,7 +47,7 @@ ng-flat-jalali-datepicker
 * `gregorian-formatted-picked-date`: **String** - تاریخ انتخاب شده به مبنای میلادی
 * `gregorian-picked-date`: **Object** - تاریخ انتخاب شده به صورت یک شی moment.js
 ```html
-<input type="text" ng-model="date" datepicker-config="yourCustomConf" gregorian-formatted-picked-date="gfdate" gregorian-picked-date="gdate"  ng-flat-jalali-datepicker>Pick a date</button>
+<input type="text" ng-model="date" datepicker-config="yourCustomConf" gregorian-formatted-picked-date="gfdate" gregorian-picked-date="gdate"  ng-flat-jalaali-datepicker>Pick a date</button>
 picked date is {{gfdate}}
 ```
 
@@ -66,12 +66,10 @@ Eg:`'jDD/jMM/jYYYY'`
 ## مشارکت
 برای مشارکت در بهبود این کد پیش‌نیازهای لازم را نصب نموده و سپس دستور زیر را وارد نمایید.
 
-`gulp js && gulp watch`
+`gulp watch`
 
 ## تقدیر و سپاس
 * «رمی چاناود» بخاطر کد پروژه اصلی:
 [RemiAWE](https://github.com/RemiAWE/ng-flat-datepicker)
 * «بهرنگ نوروزی نیا» بخاطر پروژه تقویم جلالی بر مبنای مومنت:
 [behrang](https://github.com/jalaali/moment-jalaali)
-
-

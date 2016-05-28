@@ -4,7 +4,7 @@ $table-padding: 14px;
 $font-color: #384146;
 $default-color: #0093de; // Blue
 
-.ng-jalali-flat-datepicker-wrapper {
+.ng-jalaali-flat-datepicker-wrapper {
     display: inline-block;
     position: relative;
     * {
@@ -12,14 +12,14 @@ $default-color: #0093de; // Blue
     }
 }
 
-.ng-jalali-flat-datepicker {
+.ng-jalaali-flat-datepicker {
     margin-top: 10px;
     width: $width;
     position: absolute;
     background-color: white;
     z-index: 3000;
     box-shadow: 1px 1px 7px 0px rgba(37, 53, 50, 0.37);
-    .ng-jalali-flat-datepicker-table-header-bckgrnd {
+    .ng-jalaali-flat-datepicker-table-header-bckgrnd {
         height: $header-h;
         background-color: $default-color;
     }
@@ -35,20 +35,21 @@ $default-color: #0093de; // Blue
             height: $header-h;
             display: block;
             padding: 0!important;
-            .ng-jalali-flat-datepicker-header-wrapper {
+            .ng-jalaali-flat-datepicker-header-wrapper {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 height: $header-h;
                 color: white;
                 font-size: 22px;
-                .ng-jalali-flat-datepicker-header-year {
+                direction: ltr;
+                .ng-jalaali-flat-datepicker-header-year {
                     display: flex;
                     padding-top: 1px;
                     padding-bottom: 0!important;
                     text-align: center;
                 }
-                .ng-jalali-flat-datepicker-header-nav-wrapper {
+                .ng-jalaali-flat-datepicker-header-nav-wrapper {
                     padding-top: 5px;
                     padding-bottom: 5px;
                     color: #626262;
@@ -128,7 +129,7 @@ $default-color: #0093de; // Blue
     }
 }
 
-.ng-jalali-flat-datepicker-arrow {
+.ng-jalaali-flat-datepicker-arrow {
     user-select: none;
     height: 27px;
     svg {
@@ -142,14 +143,14 @@ $default-color: #0093de; // Blue
         }
     }
 
-    &.ng-jalali-flat-datepicker-arrow-left {
+    &.ng-jalaali-flat-datepicker-arrow-left {
         svg {
             transform: rotate(180deg);
         }
     }
 }
 
-.ng-jalali-flat-datepicker-custom-select-title {
+.ng-jalaali-flat-datepicker-custom-select-title {
     padding: 3px 5px 4px 5px;
     border: 1px solid $default-color;
     border-radius: 3px;
@@ -162,16 +163,16 @@ $default-color: #0093de; // Blue
         border-color: white!important;
     }
 }
-.ng-jalali-flat-datepicker-custom-select-box {
+.ng-jalaali-flat-datepicker-custom-select-box {
     position: relative;
     padding: 5px 0;
     &:first-of-type {
-        .ng-jalali-flat-datepicker-custom-select-title,
-        .ng-jalali-flat-datepicker-custom-select {
+        .ng-jalaali-flat-datepicker-custom-select-title,
+        .ng-jalaali-flat-datepicker-custom-select {
             min-width: 80px;
         }
     }
-    .ng-jalali-flat-datepicker-custom-select {
+    .ng-jalaali-flat-datepicker-custom-select {
         position: absolute;
         border-radius: 2px;
         cursor: pointer;

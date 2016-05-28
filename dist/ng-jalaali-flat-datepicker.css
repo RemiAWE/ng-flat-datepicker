@@ -47,6 +47,7 @@
   height: 65px;
   color: white;
   font-size: 22px;
+  direction: ltr;
 }
 
 .ng-jalaali-flat-datepicker table caption .ng-jalaali-flat-datepicker-header-wrapper .ng-jalaali-flat-datepicker-header-year {
