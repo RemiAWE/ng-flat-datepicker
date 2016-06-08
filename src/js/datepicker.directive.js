@@ -11,7 +11,7 @@
         .module('ngFlatDatepicker', [])
         .directive('ngFlatDatepicker', ngFlatDatepickerDirective);
 
-    function ngFlatDatepickerDirective($templateCache, $compile, $document, datesCalculator, $timeout) {
+    function ngFlatDatepickerDirective($templateCache, $compile, $document, datesCalculator) {
         return {
             restrict: 'A',
             require: 'ngModel',

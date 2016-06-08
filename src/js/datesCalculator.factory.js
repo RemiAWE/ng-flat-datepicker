@@ -16,7 +16,7 @@
          * List all years for the select
          * @return {[type]} [description]
          */
-				 function getYearsList(minYear, maxYear) {
+		function getYearsList(minYear, maxYear) {
              var yearsList = [];
              var CurrentYear = moment()
              minYear = minYear ? minYear : 1500

@@ -7,12 +7,12 @@
      * @example <ng-datepicker></ng-datepicker>
      */
 
-    ngFlatDatepickerDirective.$inject = ["$templateCache", "$compile", "$document", "datesCalculator", "$timeout"];
+    ngFlatDatepickerDirective.$inject = ["$templateCache", "$compile", "$document", "datesCalculator"];
     angular
         .module('ngFlatDatepicker', [])
         .directive('ngFlatDatepicker', ngFlatDatepickerDirective);
 
-    function ngFlatDatepickerDirective($templateCache, $compile, $document, datesCalculator, $timeout) {
+    function ngFlatDatepickerDirective($templateCache, $compile, $document, datesCalculator) {
         return {
             restrict: 'A',
             require: 'ngModel',
@@ -228,7 +228,7 @@
          * List all years for the select
          * @return {[type]} [description]
          */
-				 function getYearsList(minYear, maxYear) {
+		function getYearsList(minYear, maxYear) {
              var yearsList = [];
              var CurrentYear = moment()
              minYear = minYear ? minYear : 1500
