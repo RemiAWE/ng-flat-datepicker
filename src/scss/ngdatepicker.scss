@@ -177,6 +177,8 @@ $default-color: #0093de; // Blue
         width: 100%;
         background-color: rgb(240,240,240);
         z-index: 1;
+				overflow-y: scroll;
+				max-height: 250px;
         span {
             padding-top: 6px;
             padding-bottom: 5px;
