@@ -11,7 +11,7 @@
         .module('ngFlatDatepicker', [])
         .directive('ngFlatDatepicker', ngFlatDatepickerDirective);
 
-    function ngFlatDatepickerDirective($templateCache, $compile, $document, datesCalculator) {
+    function ngFlatDatepickerDirective($templateCache, $compile, $document, datesCalculator, $timeout) {
         return {
             restrict: 'A',
             require: 'ngModel',
@@ -29,7 +29,9 @@
                     allowFuture: true,
                     dateFormat: null,
                     minDate: null,
-                    maxDate: null
+                    maxDate: null,
+                    minYear: null,
+                    maxYear: null,
                 };
 
                 // Apply and init options
@@ -42,7 +44,7 @@
                 scope.currentWeeks    = [];
                 scope.daysNameList    = datesCalculator.getDaysNames();
                 scope.monthsList      = moment.months();
-                scope.yearsList       = datesCalculator.getYearsList();
+                scope.yearsList       = datesCalculator.getYearsList(scope.config.minYear, scope.config.maxYear);
 
                 // Display
                 scope.pickerDisplayed = false;

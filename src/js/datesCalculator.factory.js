@@ -16,13 +16,16 @@
          * List all years for the select
          * @return {[type]} [description]
          */
-        function getYearsList() {
-            var yearsList = [];
-            for (var i = 2005; i <= moment().year(); i++) {
-                yearsList.push(i);
-            }
-            return yearsList;
-        }
+				 function getYearsList(minYear, maxYear) {
+             var yearsList = [];
+             var CurrentYear = moment()
+             minYear = minYear ? minYear : 1500
+             maxYear = maxYear ? maxYear : 3000
+             for (var i = minYear; i <= maxYear; i++) {
+                 yearsList.push(i);
+             }
+             return yearsList;
+         }
 
         /**
          * List all days name in the current locale

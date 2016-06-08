@@ -13,7 +13,9 @@
 
         $scope.datepickerConfig = {
             allowFuture: false,
-            dateFormat: 'DD/MM/YYYY'
+            dateFormat: 'DD/MM/YYYY',
+            minYear: 2000,
+            maxYear: 2050,
         };
     }
 

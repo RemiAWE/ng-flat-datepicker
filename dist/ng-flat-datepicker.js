@@ -7,11 +7,12 @@
      * @example <ng-datepicker></ng-datepicker>
      */
 
+    ngFlatDatepickerDirective.$inject = ["$templateCache", "$compile", "$document", "datesCalculator", "$timeout"];
     angular
         .module('ngFlatDatepicker', [])
         .directive('ngFlatDatepicker', ngFlatDatepickerDirective);
 
-    function ngFlatDatepickerDirective($templateCache, $compile, $document, datesCalculator) {
+    function ngFlatDatepickerDirective($templateCache, $compile, $document, datesCalculator, $timeout) {
         return {
             restrict: 'A',
             require: 'ngModel',
@@ -29,7 +30,9 @@
                     allowFuture: true,
                     dateFormat: null,
                     minDate: null,
-                    maxDate: null
+                    maxDate: null,
+                    minYear: null,
+                    maxYear: null,
                 };
 
                 // Apply and init options
@@ -42,7 +45,7 @@
                 scope.currentWeeks    = [];
                 scope.daysNameList    = datesCalculator.getDaysNames();
                 scope.monthsList      = moment.months();
-                scope.yearsList       = datesCalculator.getYearsList();
+                scope.yearsList       = datesCalculator.getYearsList(scope.config.minYear, scope.config.maxYear);
 
                 // Display
                 scope.pickerDisplayed = false;
@@ -204,7 +207,6 @@
             }
         };
     }
-    ngFlatDatepickerDirective.$inject = ["$templateCache", "$compile", "$document", "datesCalculator"];
 
 })();
 
@@ -226,13 +228,16 @@
          * List all years for the select
          * @return {[type]} [description]
          */
-        function getYearsList() {
-            var yearsList = [];
-            for (var i = 2005; i <= moment().year(); i++) {
-                yearsList.push(i);
-            }
-            return yearsList;
-        }
+				 function getYearsList(minYear, maxYear) {
+             var yearsList = [];
+             var CurrentYear = moment()
+             minYear = minYear ? minYear : 1500
+             maxYear = maxYear ? maxYear : 3000
+             for (var i = minYear; i <= maxYear; i++) {
+                 yearsList.push(i);
+             }
+             return yearsList;
+         }
 
         /**
          * List all days name in the current locale
