@@ -12,6 +12,8 @@
 
     function datesCalculator () {
 
+        var moment = window.moment ? window.moment : require('moment');
+        
         /**
          * List all years for the select
          * @return {[type]} [description]
