@@ -38,22 +38,18 @@
 }
 
 .ng-flat-datepicker table caption .ng-flat-datepicker-header-wrapper {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center;
   height: 65px;
   color: white;
   font-size: 22px;
 }
 
 .ng-flat-datepicker table caption .ng-flat-datepicker-header-wrapper .ng-flat-datepicker-header-year {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   padding-top: 1px;
@@ -118,8 +114,7 @@
           user-select: none;
 }
 
-.ng-flat-datepicker table tbody tr td.day-item,
-.ng-flat-datepicker table tbody tr td.disabled {
+.ng-flat-datepicker table tbody tr td.day-item, .ng-flat-datepicker table tbody tr td.disabled {
   padding: 0;
   height: 37.42857px;
   line-height: 37.42857px;
@@ -128,36 +123,30 @@
   color: #8d9ca4;
 }
 
-.ng-flat-datepicker table tbody tr td.day-item.day,
-.ng-flat-datepicker table tbody tr td.disabled.day {
+.ng-flat-datepicker table tbody tr td.day-item.day, .ng-flat-datepicker table tbody tr td.disabled.day {
   color: #384146;
 }
 
-.ng-flat-datepicker table tbody tr td.day-item.isToday,
-.ng-flat-datepicker table tbody tr td.disabled.isToday {
+.ng-flat-datepicker table tbody tr td.day-item.isToday, .ng-flat-datepicker table tbody tr td.disabled.isToday {
   color: #1b1b1b;
   font-weight: 700;
 }
 
-.ng-flat-datepicker table tbody tr td.day-item.isSelected,
-.ng-flat-datepicker table tbody tr td.disabled.isSelected {
+.ng-flat-datepicker table tbody tr td.day-item.isSelected, .ng-flat-datepicker table tbody tr td.disabled.isSelected {
   background-color: #0093de;
   color: #f5f5f5 !important;
 }
 
-.ng-flat-datepicker table tbody tr td.day-item.isInMonth,
-.ng-flat-datepicker table tbody tr td.disabled.isInMonth {
+.ng-flat-datepicker table tbody tr td.day-item.isInMonth, .ng-flat-datepicker table tbody tr td.disabled.isInMonth {
   color: #384146;
 }
 
-.ng-flat-datepicker table tbody tr td.day-item.isDisabled,
-.ng-flat-datepicker table tbody tr td.disabled.isDisabled {
+.ng-flat-datepicker table tbody tr td.day-item.isDisabled, .ng-flat-datepicker table tbody tr td.disabled.isDisabled {
   cursor: default;
   color: #e2e6e8;
 }
 
-.ng-flat-datepicker table tbody tr td.day-item.isDisabled:hover,
-.ng-flat-datepicker table tbody tr td.disabled.isDisabled:hover {
+.ng-flat-datepicker table tbody tr td.day-item.isDisabled:hover, .ng-flat-datepicker table tbody tr td.disabled.isDisabled:hover {
   color: #e2e6e8 !important;
   background-color: transparent;
 }
@@ -183,8 +172,7 @@
 }
 
 .ng-flat-datepicker-arrow.ng-flat-datepicker-arrow-left svg {
-  -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .ng-flat-datepicker-custom-select-title {
@@ -197,8 +185,7 @@
   cursor: pointer;
 }
 
-.ng-flat-datepicker-custom-select-title.selected,
-.ng-flat-datepicker-custom-select-title:hover {
+.ng-flat-datepicker-custom-select-title.selected, .ng-flat-datepicker-custom-select-title:hover {
   border-color: white !important;
 }
 
