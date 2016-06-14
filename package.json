@@ -42,5 +42,11 @@
     "gulp-uglify": "^1.4.0",
     "gulp-watch": "^4.3.5",
     "moment": "^2.10.6"
+  },
+  "jspm": {
+    "dependencies": {
+      "angular": "github:angular/bower-angular@^1.4.5",
+      "moment": "github:moment/moment@^2.10.6"
+    }
   }
 }

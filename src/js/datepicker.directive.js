@@ -20,6 +20,7 @@
             },
             link: function(scope, element, attrs, ngModel) {
 
+                var moment = window.moment ? window.moment : require('moment');
                 var template     = angular.element($templateCache.get('datepicker.html'));
                 var dateSelected = '';
                 var today        = moment.utc();

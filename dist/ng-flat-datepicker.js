@@ -7,6 +7,7 @@
      * @example <ng-datepicker></ng-datepicker>
      */
 
+    ngFlatDatepickerDirective.$inject = ["$templateCache", "$compile", "$document", "datesCalculator"];
     angular
         .module('ngFlatDatepicker', [])
         .directive('ngFlatDatepicker', ngFlatDatepickerDirective);
@@ -20,6 +21,7 @@
             },
             link: function(scope, element, attrs, ngModel) {
 
+                var moment = window.moment ? window.moment : require('moment');
                 var template     = angular.element($templateCache.get('datepicker.html'));
                 var dateSelected = '';
                 var today        = moment.utc();
@@ -204,7 +206,6 @@
             }
         };
     }
-    ngFlatDatepickerDirective.$inject = ["$templateCache", "$compile", "$document", "datesCalculator"];
 
 })();
 
@@ -222,6 +223,8 @@
 
     function datesCalculator () {
 
+        var moment = window.moment ? window.moment : require('moment');
+        
         /**
          * List all years for the select
          * @return {[type]} [description]
