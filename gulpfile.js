@@ -3,6 +3,7 @@
 var es   = require('event-stream');
 var gulp = require('gulp');
 var $    = require('gulp-load-plugins')();
+var eslint = require('gulp-eslint');
 
 var paths = {
     src: {
@@ -45,6 +46,14 @@ gulp.task('sass', function(){
         .pipe(gulp.dest(paths.dist));
 });
 
+
+gulp.task('lint', function () {
+    return gulp.src(['src/js/*.js','!node_modules/**'])
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
+});
+
 /**
  * Watch
  */
@@ -55,7 +64,12 @@ gulp.task('watch', function(){
     $.watch([paths.src.js, paths.src.html], $.batch(function(events, done){
         gulp.start('js', done);
     }));
+    $.watch([paths.src.js], $.batch(function(events, done){
+        gulp.start('lint', done);
+    }));
 });
+
+gulp.task('default', ['lint', 'sass', 'js']);
 
 function getTemplatesStream() {
     return gulp.src(paths.src.html)
