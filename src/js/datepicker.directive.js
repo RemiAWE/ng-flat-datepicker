@@ -15,9 +15,6 @@
         return {
             restrict: 'A',
             require: 'ngModel',
-            scope: {
-                config: '=datepickerConfig'
-            },
             link: function(scope, element, attrs, ngModel) {
 
                 var template     = angular.element($templateCache.get('datepicker.html'));
@@ -33,7 +30,7 @@
                 };
 
                 // Apply and init options
-                scope.config = angular.extend(defaultConfig, scope.config);
+                scope.config = angular.extend(defaultConfig, angular.fromJson(attrs.datepickerConfig));
                 if (angular.isDefined(scope.config.minDate)) moment.utc(scope.config.minDate).subtract(1, 'day');
                 if (angular.isDefined(scope.config.maxDate)) moment.utc(scope.config.maxDate).add(1, 'day');
 
