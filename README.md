@@ -44,7 +44,11 @@ This is an attribute only directive.
 * `datepicker-config`: **Object** - The datepicker's config object.
 
 ```html
-<input type="text" ng-model="date" datepicker-config="yourCustomConf" ng-flat-datepicker>Pick a date</button>
+<input type="text" datepicker-config="yourCustomConf" ng-model="date" ng-flat-datepicker>
+```
+
+```html
+<button ng-model="date" datepicker-config="yourCustomConf" ng-flat-datepicker>Pick a date</button>
 ```
 
 ### Config object properties:
