@@ -23,9 +23,9 @@ Lightweight Angular.js datepicker directive built with Moment.js for jalaali Cal
 
 ## Installation
 
-1. `npm install --save ng-flat-jalaali-datepicker`
+1. `npm install --save ng-jalali-flat-datepicker`
 2. Link `/dist/ng-flat-jalaali-datepicker.js`and `/dist/ng-flat-jalaali-datepicker.css`
-3. Add the module `'ngFlatjalaaliDatepicker'` as dependency of your angular module.
+3. Add the module `'ngJalaliFlatDatepicker'` as dependency of your angular module.
 
 ## Usage
 
