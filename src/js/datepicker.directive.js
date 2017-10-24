@@ -51,7 +51,7 @@
                 * returns start year based on configuration
                 */
                 var getStartYear = function() {
-                  if (typeof(scope.config.minDate) == 'undefined') {
+                  if (typeof(scope.config.minDate) !== 'undefined') {
                     return scope.config.minDate.format('YYYY');
                   }
                   if (scope.config.allowFuture) {
