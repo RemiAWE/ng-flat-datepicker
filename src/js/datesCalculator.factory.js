@@ -7,19 +7,21 @@
      */
 
      angular
-         .module('ngFlatDatepicker')
+         .module('ngJalaaliFlatDatepicker')
          .factory('datesCalculator', datesCalculator);
 
     function datesCalculator () {
 
         /**
          * List all years for the select
-         * @return {[type]} [description]
+         * @param {Integer} start year eg. 2005
+         * @param {Integer} total number of years to be appear in the drop down
+         * @return {Array<integer>} years list
          */
-        function getYearsList() {
+        function getYearsList(startYear, dropDownYears) {
             var yearsList = [];
-            for (var i = 2005; i <= moment().year(); i++) {
-                yearsList.push(i);
+            for (var i = startYear; i <= parseInt(startYear) + parseInt(dropDownYears); i++) {
+                yearsList.push(moment.utc(i.toString(), 'YYYY').format('jYYYY'));
             }
             return yearsList;
         }
@@ -31,7 +33,7 @@
         function getDaysNames () {
             var daysNameList = [];
             for (var i = 0; i < 7 ; i++) {
-                daysNameList.push(moment().weekday(i).format('ddd'));
+                daysNameList.push(moment().weekday(i).format('dd'));
             }
             return daysNameList;
         }

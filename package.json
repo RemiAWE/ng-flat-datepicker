@@ -1,32 +1,35 @@
 {
-  "name": "ng-flat-datepicker",
-  "version": "0.1.4",
-  "description": "Angular.js Datepicker built with Moment.js",
-  "homepage": "https://github.com/RemiAWE/ng-flat-datepicker#readme",
+  "name": "ng-jalaali-flat-datepicker",
+  "version": "1.0.2",
+  "description": "Angular.js Datepicker built with Moment.js for Jalaali Calendar",
+  "homepage": "https://github.com/thg303/ng-jalaali-flat-datepicker#readme",
   "keywords": [
     "angular.js",
     "angular",
     "datepicker",
+    "jalaali",
+    "hijri",
+    "جلالی",
+    "تقویم شمسی",
     "moment.js",
     "moment",
     "flat"
   ],
-  "main": "dist/ng-flat-datepicker.min.js",
+  "main": "dist/ng-jalaali-flat-datepicker.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RemiAWE/ng-flat-datepicker.git"
+    "url": "git+https://github.com/thg303/ng-jalaali-flat-datepicker.git"
   },
-  "author": "Rémi Chanaud",
+  "author": "Ali Ghanavatian",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/RemiAWE/ng-flat-datepicker/issues"
+    "url": "https://github.com/thg303/ng-jalaali-flat-datepicker/issues"
   },
   "devDependencies": {
-    "angular": "^1.4.5",
-    "event-stream": "^3.3.1",
+    "event-stream": "^3.3.2",
     "gulp": "^3.9.0",
     "gulp-angular-filesort": "^1.1.1",
     "gulp-angular-templatecache": "^1.7.0",
@@ -34,6 +37,7 @@
     "gulp-batch": "^1.0.5",
     "gulp-concat": "^2.6.0",
     "gulp-csso": "^1.0.0",
+    "gulp-jshint": "^2.0.1",
     "gulp-load-plugins": "^0.10.0",
     "gulp-ng-annotate": "^1.1.0",
     "gulp-plumber": "^1.0.1",
@@ -41,6 +45,12 @@
     "gulp-sass": "^2.0.4",
     "gulp-uglify": "^1.4.0",
     "gulp-watch": "^4.3.5",
-    "moment": "^2.10.6"
+    "jshint": "^2.9.2",
+    "jshint-stylish": "^2.2.0"
+  },
+  "dependencies": {
+    "angular": "^1.5.5",
+    "moment": "^2.13.0",
+    "moment-jalaali": "^0.4.0"
   }
 }

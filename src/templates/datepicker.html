@@ -1,28 +1,28 @@
-<div class="ng-flat-datepicker" ng-show="pickerDisplayed">
-    <div class="ng-flat-datepicker-table-header-bckgrnd"></div>
+<div class="ng-jalaali-flat-datepicker" ng-show="pickerDisplayed">
+    <div class="ng-jalaali-flat-datepicker-table-header-bckgrnd"></div>
     <table>
         <caption>
-            <div class="ng-flat-datepicker-header-wrapper">
-                <span class="ng-flat-datepicker-arrow ng-flat-datepicker-arrow-left" ng-click="prevMonth()">
+            <div class="ng-jalaali-flat-datepicker-header-wrapper">
+                <span class="ng-jalaali-flat-datepicker-arrow ng-jalaali-flat-datepicker-arrow-left" ng-click="nextMonth()">
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="50" y="50" viewBox="0 0 100 100" xml:space="preserve">
                         <polygon points="64.8,36.2 35.2,6.5 22.3,19.4 51.9,49.1 22.3,78.8 35.2,91.7 77.7,49.1" />
                     </svg>
                 </span>
-                <div class="ng-flat-datepicker-header-year">
-                    <div class="ng-flat-datepicker-custom-select-box" outside-click="showMonthsList = false">
-                        <span class="ng-flat-datepicker-custom-select-title ng-flat-datepicker-month-name" ng-click="showMonthsList = !showMonthsList; showYearsList = false" ng-class="{selected: showMonthsList }">{{ calendarCursor.isValid() ? calendarCursor.format('MMMM') : "" }}</span>
-                        <div class="ng-flat-datepicker-custom-select" ng-show="showMonthsList">
+                <div class="ng-jalaali-flat-datepicker-header-year">
+                    <div class="ng-jalaali-flat-datepicker-custom-select-box" outside-click="showMonthsList = false">
+                        <span class="ng-jalaali-flat-datepicker-custom-select-title ng-jalaali-flat-datepicker-month-name" ng-click="showMonthsList = !showMonthsList; showYearsList = false" ng-class="{selected: showMonthsList }">{{ calendarCursor.isValid() ? calendarCursor.format('jMMMM') : "" }}</span>
+                        <div class="ng-jalaali-flat-datepicker-custom-select" ng-show="showMonthsList">
                             <span ng-repeat="monthName in monthsList" ng-click="selectMonth(monthName); showMonthsList = false">{{ monthName }}</span>
                         </div>
                     </div>
-                    <div class="ng-flat-datepicker-custom-select-box" outside-click="showYearsList = false">
-                        <span class="ng-flat-datepicker-custom-select-title" ng-click="showYearsList = !showYearsList; showMonthsList = false" ng-class="{selected: showYearsList }">{{ calendarCursor.isValid() ? calendarCursor.format('YYYY') : "" }}</span>
-                        <div class="ng-flat-datepicker-custom-select" ng-show="showYearsList">
+                    <div class="ng-jalaali-flat-datepicker-custom-select-box" outside-click="showYearsList = false">
+                        <span class="ng-jalaali-flat-datepicker-custom-select-title" ng-click="showYearsList = !showYearsList; showMonthsList = false" ng-class="{selected: showYearsList }">{{ calendarCursor.isValid() ? calendarCursor.format('jYYYY') : "" }}</span>
+                        <div class="ng-jalaali-flat-datepicker-custom-select" ng-show="showYearsList">
                             <span ng-repeat="yearNumber in yearsList" ng-click="selectYear(yearNumber)">{{ yearNumber }}</span>
                         </div>
                     </div>
                 </div>
-                <span class="ng-flat-datepicker-arrow ng-flat-datepicker-arrow-right" ng-click="nextMonth()">
+                <span class="ng-jalaali-flat-datepicker-arrow ng-jalaali-flat-datepicker-arrow-right" ng-click="prevMonth()">
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="50" y="50" viewBox="0 0 100 100" xml:space="preserve">
                         <polygon points="64.8,36.2 35.2,6.5 22.3,19.4 51.9,49.1 22.3,78.8 35.2,91.7 77.7,49.1" />
                     </svg>
@@ -34,7 +34,7 @@
                 <td class="day-head" ng-repeat="dayName in daysNameList">{{ dayName }}</td>
             </tr>
             <tr class="days" ng-repeat="week in currentWeeks">
-                <td ng-repeat="day in week" ng-click="selectDay(day)" ng-class="['day-item', { 'isToday': day.isToday, 'isInMonth': day.isInMonth, 'isDisabled': !day.isSelectable, 'isSelected': day.isSelected }]">{{ day.date | date:'dd' }}</td>
+                <td ng-repeat="day in week" ng-click="selectDay(day)" ng-class="['day-item', { 'isToday': day.isToday, 'isInMonth': day.isInMonth, 'isDisabled': !day.isSelectable, 'isSelected': day.isSelected }]">{{ day.jDate }}</td>
             </tr>
         </tbody>
     </table>

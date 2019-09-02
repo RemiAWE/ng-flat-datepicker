@@ -6,14 +6,16 @@
      * Test code for ng-datepicker demo
      */
     angular
-        .module('testApp', ['ngFlatDatepicker'])
+        .module('testApp', ['ngJalaaliFlatDatepicker'])
         .controller('mainController', ['$scope', mainController]);
 
     function mainController ($scope) {
 
         $scope.datepickerConfig = {
             allowFuture: false,
-            dateFormat: 'DD/MM/YYYY'
+            dateFormat: 'jYYYY/jMM/jDD',
+            gregorianDateFormat: 'YYYY/DD/MM',
+            minDate: moment.utc('2008', 'YYYY')
         };
     }
 

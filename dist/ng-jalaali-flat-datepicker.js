@@ -7,6 +7,7 @@
      * @example <ng-datepicker></ng-datepicker>
      */
 
+    ngJalaaliFlatDatepickerDirective.$inject = ["$templateCache", "$compile", "$document", "datesCalculator"];
     angular
         .module('ngJalaaliFlatDatepicker', [])
         .directive('ngJalaaliFlatDatepicker', ngJalaaliFlatDatepickerDirective);
@@ -241,3 +242,53 @@
     }
 
 })();
+
+(function(){
+
+    'use strict';
+
+    /**
+     * @desc Dates calculator factory
+     */
+
+     angular
+         .module('ngJalaaliFlatDatepicker')
+         .factory('datesCalculator', datesCalculator);
+
+    function datesCalculator () {
+
+        /**
+         * List all years for the select
+         * @param {Integer} start year eg. 2005
+         * @param {Integer} total number of years to be appear in the drop down
+         * @return {Array<integer>} years list
+         */
+        function getYearsList(startYear, dropDownYears) {
+            var yearsList = [];
+            for (var i = startYear; i <= parseInt(startYear) + parseInt(dropDownYears); i++) {
+                yearsList.push(moment.utc(i.toString(), 'YYYY').format('jYYYY'));
+            }
+            return yearsList;
+        }
+
+        /**
+         * List all days name in the current locale
+         * @return {[type]} [description]
+         */
+        function getDaysNames () {
+            var daysNameList = [];
+            for (var i = 0; i < 7 ; i++) {
+                daysNameList.push(moment().weekday(i).format('dd'));
+            }
+            return daysNameList;
+        }
+
+        return {
+            getYearsList: getYearsList,
+            getDaysNames: getDaysNames
+        };
+    }
+
+})();
+
+angular.module("ngJalaaliFlatDatepicker").run(["$templateCache", function($templateCache) {$templateCache.put("datepicker.html","<div class=\"ng-jalaali-flat-datepicker\" ng-show=\"pickerDisplayed\">\r\n    <div class=\"ng-jalaali-flat-datepicker-table-header-bckgrnd\"></div>\r\n    <table>\r\n        <caption>\r\n            <div class=\"ng-jalaali-flat-datepicker-header-wrapper\">\r\n                <span class=\"ng-jalaali-flat-datepicker-arrow ng-jalaali-flat-datepicker-arrow-left\" ng-click=\"nextMonth()\">\r\n                    <svg version=\"1.0\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"50\" y=\"50\" viewBox=\"0 0 100 100\" xml:space=\"preserve\">\r\n                        <polygon points=\"64.8,36.2 35.2,6.5 22.3,19.4 51.9,49.1 22.3,78.8 35.2,91.7 77.7,49.1\" />\r\n                    </svg>\r\n                </span>\r\n                <div class=\"ng-jalaali-flat-datepicker-header-year\">\r\n                    <div class=\"ng-jalaali-flat-datepicker-custom-select-box\" outside-click=\"showMonthsList = false\">\r\n                        <span class=\"ng-jalaali-flat-datepicker-custom-select-title ng-jalaali-flat-datepicker-month-name\" ng-click=\"showMonthsList = !showMonthsList; showYearsList = false\" ng-class=\"{selected: showMonthsList }\">{{ calendarCursor.isValid() ? calendarCursor.format(\'jMMMM\') : \"\" }}</span>\r\n                        <div class=\"ng-jalaali-flat-datepicker-custom-select\" ng-show=\"showMonthsList\">\r\n                            <span ng-repeat=\"monthName in monthsList\" ng-click=\"selectMonth(monthName); showMonthsList = false\">{{ monthName }}</span>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"ng-jalaali-flat-datepicker-custom-select-box\" outside-click=\"showYearsList = false\">\r\n                        <span class=\"ng-jalaali-flat-datepicker-custom-select-title\" ng-click=\"showYearsList = !showYearsList; showMonthsList = false\" ng-class=\"{selected: showYearsList }\">{{ calendarCursor.isValid() ? calendarCursor.format(\'jYYYY\') : \"\" }}</span>\r\n                        <div class=\"ng-jalaali-flat-datepicker-custom-select\" ng-show=\"showYearsList\">\r\n                            <span ng-repeat=\"yearNumber in yearsList\" ng-click=\"selectYear(yearNumber)\">{{ yearNumber }}</span>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <span class=\"ng-jalaali-flat-datepicker-arrow ng-jalaali-flat-datepicker-arrow-right\" ng-click=\"prevMonth()\">\r\n                    <svg version=\"1.0\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"50\" y=\"50\" viewBox=\"0 0 100 100\" xml:space=\"preserve\">\r\n                        <polygon points=\"64.8,36.2 35.2,6.5 22.3,19.4 51.9,49.1 22.3,78.8 35.2,91.7 77.7,49.1\" />\r\n                    </svg>\r\n                </span>\r\n            </div>\r\n        </caption>\r\n        <tbody>\r\n            <tr class=\"days-head\">\r\n                <td class=\"day-head\" ng-repeat=\"dayName in daysNameList\">{{ dayName }}</td>\r\n            </tr>\r\n            <tr class=\"days\" ng-repeat=\"week in currentWeeks\">\r\n                <td ng-repeat=\"day in week\" ng-click=\"selectDay(day)\" ng-class=\"[\'day-item\', { \'isToday\': day.isToday, \'isInMonth\': day.isInMonth, \'isDisabled\': !day.isSelectable, \'isSelected\': day.isSelected }]\">{{ day.jDate }}</td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n</div>\r\n");}]);
